@@ -19,3 +19,4 @@ Gather sensible estimates of different regions input-output tables of technical 
 2. Calculate **Cross-Industry Location Quotient** (CILQ)
 3. Calculate FLQ_kl
 4. Calculate ro^r_kl
+5. 

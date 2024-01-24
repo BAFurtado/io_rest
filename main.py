@@ -46,6 +46,7 @@ def calculate_slq_k(list_regions: List[str],
 
 def calculate_lambda(y_r, y_n, delta=.15):
     # To what extent region size affects regional coefficients
+    # delta [0, 1)
     return (math.log2(1 + y_r / y_n)) ** delta
 
 
@@ -63,12 +64,22 @@ def calculate_flq_kl(lambda_, slq, cilq):
     """ If k == l,  lambda * CILQ_kl
         else:       lambda * SLQ_k
         """
+    flq = pd.DataFrame(columns=cilq.columns)
+    for k in cilq.index:
+        for l in cilq.columns:
+            if k == l:
+                flq.loc[k, l] = lambda_.loc[k, 'lambda'] * slq.loc[k, 'SLQ']
+            else:
+                flq.loc[k, l] = lambda_.loc[k, 'lambda'] * cilq.loc[k, l]
+    return flq
 
-    return 1
 
-
-def calculate_rho():
-    pass
+def calculate_rho(flq):
+    for k in flq.index:
+        for l in flq.columns:
+            if flq.loc[k, l] >= 1:
+                flq.loc[k, l] = 1
+    return flq
 
 
 def main():
@@ -84,7 +95,7 @@ if __name__ == '__main__':
 
     # DEBUG. Restrict rest_list to a small number to implement things faster
     # In this example, BRASÍLIA is the METRO and the REST OF BR is the rest
-    rest_list = rest_list[:100]
+    rest_list = rest_list[:1000]
 
     slq_me, lbda_me = calculate_slq_k(metro_list, massa)
     slq_re, lbda_re = calculate_slq_k(rest_list, massa)
@@ -95,10 +106,13 @@ if __name__ == '__main__':
     flq_me = calculate_flq_kl(lbda_me, slq_me, cilq_me)
     flq_re = calculate_flq_kl(lbda_re, slq_re, cilq_re)
 
+    flq_me = calculate_rho(flq_me)
+    flq_re = calculate_rho(flq_re)
+
     # Will need to enter existing technical matrix to derive the proportions... (later)
 
     # with open('slq_me_slq_re', 'wb') as handler:
     #     pickle.dump([slq_me, slq_re], handler)
 
-    with open('slq_re_slq_me', 'rb') as handler:
-        slq_re, slq_me = pickle.load(handler)
+    # with open('slq_re_slq_me', 'rb') as handler:
+    #     slq_re, slq_me = pickle.load(handler)
