@@ -82,6 +82,22 @@ def calculate_rho(flq):
     return flq
 
 
+def calculate_regional_technical_matrix_from_rho(A, rho):
+    reg_matrix = pd.DataFrame(columns=A.columns)
+    for k in A.index:
+        for l in A.columns:
+            reg_matrix.loc[k, l] = A.loc[k, l] * rho.loc[k, l]
+    return reg_matrix
+
+
+def calculate_residual_matrix(A, regional):
+    residual_matrix = pd.DataFrame(columns=A.columns)
+    for k in A.index:
+        for l in A.columns:
+            residual_matrix.loc[k, l] = A.loc[k, l] - regional.loc[k, l]
+    return residual_matrix
+
+
 def main():
     pass
 
@@ -106,10 +122,19 @@ if __name__ == '__main__':
     flq_me = calculate_flq_kl(lbda_me, slq_me, cilq_me)
     flq_re = calculate_flq_kl(lbda_re, slq_re, cilq_re)
 
-    flq_me = calculate_rho(flq_me)
-    flq_re = calculate_rho(flq_re)
+    rho_me = calculate_rho(flq_me)
+    rho_re = calculate_rho(flq_re)
 
-    # Will need to enter existing technical matrix to derive the proportions... (later)
+    # A is the technical coefficient matrix
+    A_kl = pd.read_csv('data/technical_matrix.csv').set_index('sector')
+
+    # Calculating the deriving matrices
+    A_me = calculate_regional_technical_matrix_from_rho(A_kl, rho_me)
+    A_re = calculate_regional_technical_matrix_from_rho(A_kl, rho_re)
+
+    # Stop! GREEN, p.50
+    # A_re_me = calculate_residual_matrix(A_kl, A_me)
+    # A_me_re = calculate_residual_matrix(A_kl, A_re)
 
     # with open('slq_me_slq_re', 'wb') as handler:
     #     pickle.dump([slq_me, slq_re], handler)
