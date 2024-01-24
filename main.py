@@ -10,16 +10,21 @@ def calculate_slq_k(list_regions: List[str],
                     classification_col: str = 'isic_r4',
                     region_col: str = 'codemun',
                     gdp_col: str = 'massa_salarial_sum') \
-        -> pd.DataFrame:
+        -> (pd.DataFrame, pd.DataFrame):
     """ Regional GDP of industry k in a generic region r divided by the sum for industry k of all GDP
         divided by GDP of industry k nationally divided by all GDP
-        SLQ_k = y_k^r / y^r /
-                y_n^k / y^n
+        SLQ_k = (y_k^r / y^r) /
+                (y_n^k / y^n)
+        k is an industry/sector
+        l is another sector within the same region
+        "CILQ_kl > 1 implies that GDP of regional sector k is larger than GDP of regional sector l than it
+        is at the national levels. Thus, the demand of l can be fully met by the supply of k.
+        On the other hand, if CILQkl < 1, parts of l’s demand need to be imported."
     """
     output = pd.DataFrame(columns=['SLQ'])
     lambda_ = defaultdict(float)
     y_k_r, y_r, y_n_k, y_n = defaultdict(int), 1, defaultdict(int), 1
-    # Each sector is eack k industry
+    # Each sector is each k industry
     for sector in y[classification_col].unique():
         for region in list_regions:
             try:
@@ -35,6 +40,7 @@ def calculate_slq_k(list_regions: List[str],
         output.loc[sector, 'SLQ'] = SLQ_r
         print(f'SLQ_{sector} = {SLQ_r}')
         lambda_[sector] = calculate_lambda(y_r, y_n)
+    lambda_ = pd.DataFrame.from_dict(lambda_, orient='index', columns=['lambda'])
     return output, lambda_
 
 
@@ -53,11 +59,19 @@ def calculate_cilq_kl(slq: pd.DataFrame):
     return cilq_matrix
 
 
-def calculate_flq_kl():
-    pass
+def calculate_flq_kl(lambda_, slq, cilq):
+    """ If k == l,  lambda * CILQ_kl
+        else:       lambda * SLQ_k
+        """
+
+    return 1
 
 
 def calculate_rho():
+    pass
+
+
+def main():
     pass
 
 
@@ -68,11 +82,20 @@ if __name__ == '__main__':
     metro_list = metro.codemun.to_list()
     rest_list = [code for code in massa.codemun.to_list() if code not in metro_list]
 
+    # DEBUG. Restrict rest_list to a small number to implement things faster
+    # In this example, BRASÍLIA is the METRO and the REST OF BR is the rest
+    rest_list = rest_list[:100]
+
     slq_me, lbda_me = calculate_slq_k(metro_list, massa)
     slq_re, lbda_re = calculate_slq_k(rest_list, massa)
 
     cilq_me = calculate_cilq_kl(slq_me)
     cilq_re = calculate_cilq_kl(slq_re)
+
+    flq_me = calculate_flq_kl(lbda_me, slq_me, cilq_me)
+    flq_re = calculate_flq_kl(lbda_re, slq_re, cilq_re)
+
+    # Will need to enter existing technical matrix to derive the proportions... (later)
 
     # with open('slq_me_slq_re', 'wb') as handler:
     #     pickle.dump([slq_me, slq_re], handler)
