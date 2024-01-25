@@ -101,7 +101,7 @@ def calculate_residual_matrix(A, regional):
 
 
 def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_right, metro='BSB', rest='RestBR'):
-    cols = [f'{name}_{col}' for name in [metro, rest] for col in A_me.columns]
+    cols = [f'{name}_{col}' for name in [metro, rest] for col in upper_left.columns]
     number_of_sectors = 12
     # Create final matrix
     result_matrix = pd.DataFrame(columns=cols, index=cols)
