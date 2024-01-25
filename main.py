@@ -1,11 +1,10 @@
-import pickle
+import math
 from collections import defaultdict
 from typing import List
-import math
-import pandas as pd
-import numpy as np
-import seaborn as sns
+
 import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
 
 
 def calculate_slq_k(list_regions: List[str],
@@ -110,45 +109,54 @@ def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_ri
     result_matrix.iloc[:number_of_sectors, number_of_sectors:] = upper_right
     result_matrix.iloc[number_of_sectors:, :number_of_sectors] = bottom_left
     result_matrix.iloc[number_of_sectors:, number_of_sectors:] = bottom_right
+
+    plt.figure(figsize=(12, 12))
+    # Create a heatmap using Seaborn
+    sns.heatmap(result_matrix, cmap="viridis", cbar=True)
+    plt.xticks(fontsize=12, rotation=90)
+    plt.yticks(fontsize=12)
+    plt.tight_layout()
+    plt.show()
     return result_matrix.astype(float)
 
 
-def main():
-    pass
+def main(metro_list, technical_matrix=None):
+    if not technical_matrix:
+        # A is the technical coefficient matrix. But it can also be final demand matrix
+        A_kl = pd.read_csv('data/technical_matrix.csv').set_index('sector')
+    else:
+        A_kl = technical_matrix
+    # Read the list of all municipalities with code and sum of all salaries per sector
+    massa_salarial = pd.read_csv('data/mun_isis12_2010.csv')
+    # Derive the list of the rest of BRAZIL
+    rest_list = [code for code in massa_salarial.codemun.to_list() if code not in metro_list]
+    # Calculate SLQ and lambda for both groups of municipalities
+    slq_me, lbda_me = calculate_slq_k(metro_list, massa_salarial)
+    slq_re, lbda_re = calculate_slq_k(rest_list, massa_salarial)
+    # Calculate CILQ for both groups of municipalities
+    cilq_me = calculate_cilq_kl(slq_me)
+    cilq_re = calculate_cilq_kl(slq_re)
+    # Calculate FLQ for both groups of municipalities
+    flq_me = calculate_flq_kl(lbda_me, slq_me, cilq_me)
+    flq_re = calculate_flq_kl(lbda_re, slq_re, cilq_re)
+    # Calculate RHO for both groups of municipalities
+    rho_me = calculate_rho(flq_me)
+    rho_re = calculate_rho(flq_re)
+    # Calculating the deriving matrices
+    A_me = calculate_regional_technical_matrix_from_rho(A_kl, rho_me)
+    A_re = calculate_regional_technical_matrix_from_rho(A_kl, rho_re)
+    # Calculating residuals matrices
+    A_re_me = calculate_residual_matrix(A_kl, A_me)
+    A_me_re = calculate_residual_matrix(A_kl, A_re)
+    # Putting it all together and plotting
+    result_matrix = putting_together_full_matrix(A_me, A_me_re, A_re, A_re_me)
+    return result_matrix
 
 
 if __name__ == '__main__':
     metr = pd.read_csv('data/list_mun_to_matrix.csv')
-    massa_salarial = pd.read_csv('data/mun_isis12_2010.csv')
-
-    metro_list = metr.codemun.to_list()
-    rest_list = [code for code in massa_salarial.codemun.to_list() if code not in metro_list]
-
-    slq_me, lbda_me = calculate_slq_k(metro_list, massa_salarial)
-    slq_re, lbda_re = calculate_slq_k(rest_list, massa_salarial)
-
-    cilq_me = calculate_cilq_kl(slq_me)
-    cilq_re = calculate_cilq_kl(slq_re)
-
-    flq_me = calculate_flq_kl(lbda_me, slq_me, cilq_me)
-    flq_re = calculate_flq_kl(lbda_re, slq_re, cilq_re)
-
-    rho_me = calculate_rho(flq_me)
-    rho_re = calculate_rho(flq_re)
-
-    # A is the technical coefficient matrix
-    A_kl = pd.read_csv('data/technical_matrix.csv').set_index('sector')
-
-    # Calculating the deriving matrices
-    A_me = calculate_regional_technical_matrix_from_rho(A_kl, rho_me)
-    A_re = calculate_regional_technical_matrix_from_rho(A_kl, rho_re)
-
-    # Calculating residuals matrices
-    A_re_me = calculate_residual_matrix(A_kl, A_me)
-    A_me_re = calculate_residual_matrix(A_kl, A_re)
-
-    # Putting it all together
-    res = putting_together_full_matrix(A_me, A_me_re, A_re, A_re_me)
+    metr_list = metr.codemun.to_list()
+    res = main(metr_list)
 
     # with open('slq_me_slq_re', 'wb') as handler:
     #     pickle.dump([slq_me, slq_re], handler)
