@@ -3,6 +3,9 @@ from collections import defaultdict
 from typing import List
 import math
 import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 def calculate_slq_k(list_regions: List[str],
@@ -34,7 +37,7 @@ def calculate_slq_k(list_regions: List[str],
                 # Missing sector for this municipality
                 pass
         y_r = sum(y_k_r.values()) or 1
-        y_n_k[sector] += y.loc[massa[classification_col] == sector][gdp_col].reset_index().loc[0, gdp_col]
+        y_n_k[sector] += y.loc[y[classification_col] == sector][gdp_col].reset_index().loc[0, gdp_col]
         y_n = sum(y_n_k.values())
         SLQ_r = (y_k_r[sector] / y_r) / (y_n_k[sector] / y_n)
         output.loc[sector, 'SLQ'] = SLQ_r
@@ -98,23 +101,31 @@ def calculate_residual_matrix(A, regional):
     return residual_matrix
 
 
+def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_right, metro='BSB', rest='RestBR'):
+    cols = [f'{name}_{col}' for name in [metro, rest] for col in A_me.columns]
+    number_of_sectors = 12
+    # Create final matrix
+    result_matrix = pd.DataFrame(columns=cols, index=cols)
+    result_matrix.iloc[:number_of_sectors, :number_of_sectors] = upper_left
+    result_matrix.iloc[:number_of_sectors, number_of_sectors:] = upper_right
+    result_matrix.iloc[number_of_sectors:, :number_of_sectors] = bottom_left
+    result_matrix.iloc[number_of_sectors:, number_of_sectors:] = bottom_right
+    return result_matrix.astype(float)
+
+
 def main():
     pass
 
 
 if __name__ == '__main__':
-    metro = pd.read_csv('data/list_mun_to_matrix.csv')
-    massa = pd.read_csv('data/mun_isis12_2010.csv')
+    metr = pd.read_csv('data/list_mun_to_matrix.csv')
+    massa_salarial = pd.read_csv('data/mun_isis12_2010.csv')
 
-    metro_list = metro.codemun.to_list()
-    rest_list = [code for code in massa.codemun.to_list() if code not in metro_list]
+    metro_list = metr.codemun.to_list()
+    rest_list = [code for code in massa_salarial.codemun.to_list() if code not in metro_list]
 
-    # DEBUG. Restrict rest_list to a small number to implement things faster
-    # In this example, BRASÍLIA is the METRO and the REST OF BR is the rest
-    rest_list = rest_list[:1000]
-
-    slq_me, lbda_me = calculate_slq_k(metro_list, massa)
-    slq_re, lbda_re = calculate_slq_k(rest_list, massa)
+    slq_me, lbda_me = calculate_slq_k(metro_list, massa_salarial)
+    slq_re, lbda_re = calculate_slq_k(rest_list, massa_salarial)
 
     cilq_me = calculate_cilq_kl(slq_me)
     cilq_re = calculate_cilq_kl(slq_re)
@@ -132,9 +143,12 @@ if __name__ == '__main__':
     A_me = calculate_regional_technical_matrix_from_rho(A_kl, rho_me)
     A_re = calculate_regional_technical_matrix_from_rho(A_kl, rho_re)
 
-    # Stop! GREEN, p.50
-    # A_re_me = calculate_residual_matrix(A_kl, A_me)
-    # A_me_re = calculate_residual_matrix(A_kl, A_re)
+    # Calculating residuals matrices
+    A_re_me = calculate_residual_matrix(A_kl, A_me)
+    A_me_re = calculate_residual_matrix(A_kl, A_re)
+
+    # Putting it all together
+    res = putting_together_full_matrix(A_me, A_me_re, A_re, A_re_me)
 
     # with open('slq_me_slq_re', 'wb') as handler:
     #     pickle.dump([slq_me, slq_re], handler)
