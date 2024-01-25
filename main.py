@@ -1,8 +1,10 @@
 import math
+import pickle
 from collections import defaultdict
 from typing import List
 
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 import seaborn as sns
 
@@ -25,7 +27,7 @@ def calculate_slq_k(list_regions: List[str],
     """
     output = pd.DataFrame(columns=['SLQ'])
     lambda_ = defaultdict(float)
-    y_k_r, y_r, y_n_k, y_n = defaultdict(int), 1, defaultdict(int), 1
+    y_k_r, y_r, y_n_k, y_n = defaultdict(float), 1, defaultdict(float), 1
     # Each sector is each k industry
     for sector in y[classification_col].unique():
         for region in list_regions:
@@ -35,9 +37,10 @@ def calculate_slq_k(list_regions: List[str],
             except KeyError:
                 # Missing sector for this municipality
                 pass
-        y_r = sum(y_k_r.values()) or 1
         y_n_k[sector] += y.loc[y[classification_col] == sector][gdp_col].reset_index().loc[0, gdp_col]
-        y_n = sum(y_n_k.values())
+    y_r = sum(y_k_r.values())
+    y_n = sum(y_n_k.values())
+    for sector in y[classification_col].unique():
         SLQ_r = (y_k_r[sector] / y_r) / (y_n_k[sector] / y_n)
         output.loc[sector, 'SLQ'] = SLQ_r
         print(f'SLQ_{sector} = {SLQ_r}')
@@ -100,8 +103,8 @@ def calculate_residual_matrix(A, regional):
     return residual_matrix
 
 
-def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_right, metro='BSB', rest='RestBR'):
-    cols = [f'{name}_{col}' for name in [metro, rest] for col in upper_left.columns]
+def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_right, metro_name='BSB', rest='RestBR'):
+    cols = [f'{name}_{col}' for name in [metro_name, rest] for col in upper_left.columns]
     number_of_sectors = 12
     # Create final matrix
     result_matrix = pd.DataFrame(columns=cols, index=cols)
@@ -112,7 +115,10 @@ def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_ri
 
     plt.figure(figsize=(12, 12))
     # Create a heatmap using Seaborn
-    sns.heatmap(result_matrix, cmap="viridis", cbar=True)
+    sns.heatmap(result_matrix.astype(float), cmap="viridis", cbar=True)
+    plt.xlabel('Industry of destination')
+    plt.ylabel('Industry of origin')
+    plt.title('$\\rho$ coefficient')
     plt.xticks(fontsize=12, rotation=90)
     plt.yticks(fontsize=12)
     plt.tight_layout()
@@ -120,16 +126,21 @@ def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_ri
     return result_matrix.astype(float)
 
 
-def main(metro_list, technical_matrix=None):
-    if not technical_matrix:
-        # A is the technical coefficient matrix. But it can also be final demand matrix
-        A_kl = pd.read_csv('data/technical_matrix.csv').set_index('sector')
-    else:
-        A_kl = technical_matrix
+def main(metro_list, metro_name='BSB', rest='RestBR', debug=False):
+    """ Receives a list of municipalities codes as integer and return the technical matrix and final demand
+        for that metro region, plus the rest of Brazil.
+        """
+    # A is the technical coefficient matrix. But it can also be final demand matrix
+    A_kl = pd.read_csv('data/technical_matrix.csv').set_index('sector')
+    # fd is the final demand vectors
+    fd = pd.read_csv('data/final_demand.csv')
     # Read the list of all municipalities with code and sum of all salaries per sector
     massa_salarial = pd.read_csv('data/mun_isis12_2010.csv')
     # Derive the list of the rest of BRAZIL
     rest_list = [code for code in massa_salarial.codemun.to_list() if code not in metro_list]
+    # DEBUG
+    if debug:
+        rest_list = rest_list[:100]
     # Calculate SLQ and lambda for both groups of municipalities
     slq_me, lbda_me = calculate_slq_k(metro_list, massa_salarial)
     slq_re, lbda_re = calculate_slq_k(rest_list, massa_salarial)
@@ -142,6 +153,9 @@ def main(metro_list, technical_matrix=None):
     # Calculate RHO for both groups of municipalities
     rho_me = calculate_rho(flq_me)
     rho_re = calculate_rho(flq_re)
+    # Calculate rho final demand for both groups
+    rho_me_final = np.diag(flq_me.values)
+    rho_re_final = np.diag(flq_re.values)
     # Calculating the deriving matrices
     A_me = calculate_regional_technical_matrix_from_rho(A_kl, rho_me)
     A_re = calculate_regional_technical_matrix_from_rho(A_kl, rho_re)
@@ -149,17 +163,15 @@ def main(metro_list, technical_matrix=None):
     A_re_me = calculate_residual_matrix(A_kl, A_me)
     A_me_re = calculate_residual_matrix(A_kl, A_re)
     # Putting it all together and plotting
-    result_matrix = putting_together_full_matrix(A_me, A_me_re, A_re, A_re_me)
+    result_matrix = putting_together_full_matrix(A_me, A_me_re, A_re, A_re_me, metro_name, rest)
     return result_matrix
 
 
 if __name__ == '__main__':
     metr = pd.read_csv('data/list_mun_to_matrix.csv')
     metr_list = metr.codemun.to_list()
-    res = main(metr_list)
+    metr_name = 'BSB'
+    res = main(metr_list, metro_name=metr_name, debug=False)
 
-    # with open('slq_me_slq_re', 'wb') as handler:
-    #     pickle.dump([slq_me, slq_re], handler)
-
-    # with open('slq_re_slq_me', 'rb') as handler:
-    #     slq_re, slq_me = pickle.load(handler)
+    with open(f'matrix_{metr_name}', 'wb') as handler:
+        pickle.dump(res, handler)
