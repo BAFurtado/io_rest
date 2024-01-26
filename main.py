@@ -1,5 +1,5 @@
+import json
 import math
-import pickle
 from collections import defaultdict
 from typing import List
 
@@ -208,9 +208,10 @@ if __name__ == '__main__':
     # metr = pd.read_csv('data/list_mun_to_matrix.csv')
     # metr_list = metr.codemun.to_list()
     # metr_name = 'BSB'
-    alternative_col = 'qtde_vinc_ativos_sum'
-    metr_name = 'SAO PAULO'
-    res = main(metro_name=metr_name, debug=False, col_interest=alternative_col)
 
-    with open(f'matrix_{metr_name}', 'wb') as handler:
-        pickle.dump(res, handler)
+    for each in ['qtde_vinc_ativos_sum', 'massa_salarial_sum']:
+        metr_name = 'IPATINGA'
+        res = main(metro_name=metr_name, debug=False, col_interest=each)
+
+        with open(f'matrix_{metr_name}.json', 'w') as handler:
+            json.dump(res.to_json(), handler, indent=4)
