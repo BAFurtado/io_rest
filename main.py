@@ -129,6 +129,32 @@ def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_ri
     return result_matrix
 
 
+def preparing_final_demand():
+    """ This is f^n_k / f_n for coluns of consumption, government, export and FBCF.
+        Multiplied by the f_rho_k to get f^r_k / f^r -> percentage by sector per region
+        """
+    try:
+        return pd.read_csv('data/final_demand.csv').set_index('sector')
+    except FileNotFoundError:
+        pass
+    final_demand = pd.read_csv('data/tab3_mip_2015_ibge.csv')
+    final_demand = final_demand[['sector', 'Export', 'GovernmentConsumption', 'ConsumptionNGOs',
+                                 'HouseholdConsumption', 'FBCFixo', 'FinalDemand']].set_index('sector')
+    final_demand = final_demand.iloc[:12, :]
+    for col in final_demand.columns:
+        if col != 'FinalDemand':
+            final_demand.loc[:, col] = final_demand[col] / final_demand['FinalDemand']
+    final_demand.drop('FinalDemand', axis=1, inplace=True)
+    final_demand.to_csv('data/final_demand.csv')
+    return final_demand
+
+
+def multiply_rho_final_demand(final_demand, rho):
+    for col in final_demand.columns:
+        final_demand.loc[:, col] = final_demand[col] * rho
+    return final_demand
+
+
 def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col_interest='massa_salarial_sum'):
     """ Receives a list of municipalities codes as integer and return the technical matrix and final demand
         for that metro region, plus the rest of Brazil.
@@ -139,15 +165,14 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
         metro_list = acps[acps['ACPs'] == metro_name]['cod_mun'].to_list()
     # A is the technical coefficient matrix. But it can also be final demand matrix
     A_kl = pd.read_csv('data/technical_matrix.csv').set_index('sector')
-    # fd is the final demand vectors
-    fd = pd.read_csv('data/final_demand.csv')
+
     # Read the list of all municipalities with code and sum of all salaries per sector
     massa_salarial = pd.read_csv('data/mun_isic12_2010.csv')
     # Derive the list of the rest of BRAZIL
     rest_list = [code for code in massa_salarial.codemun.to_list() if code not in metro_list]
     # DEBUG
     if debug:
-        rest_list = rest_list[:100]
+        rest_list = rest_list[:1000]
     # Calculate SLQ and lambda for both groups of municipalities
     slq_me, lbda_me = calculate_slq_k(metro_list, massa_salarial, gdp_col=col_interest)
     slq_re, lbda_re = calculate_slq_k(rest_list, massa_salarial, gdp_col=col_interest)
@@ -163,6 +188,11 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     # Calculate rho final demand for both groups
     rho_me_final = np.diag(flq_me.values)
     rho_re_final = np.diag(flq_re.values)
+    # Get final demand columns to produce region specific matrix
+    final_demand = preparing_final_demand()
+    final_demand_re = multiply_rho_final_demand(final_demand, rho_re_final)
+    final_demand_me = multiply_rho_final_demand(final_demand, rho_me_final)
+    # TODO: Montar final demand final matrix
     # Calculating the deriving matrices
     A_me = calculate_regional_technical_matrix_from_rho(A_kl, rho_me)
     A_re = calculate_regional_technical_matrix_from_rho(A_kl, rho_re)
