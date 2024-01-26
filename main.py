@@ -9,7 +9,7 @@ import pandas as pd
 import seaborn as sns
 
 
-def calculate_slq_k(list_regions: List[str],
+def calculate_slq_k(list_regions: List[int],
                     y: pd.DataFrame,
                     classification_col: str = 'isic_r4',
                     region_col: str = 'codemun',
@@ -103,7 +103,8 @@ def calculate_residual_matrix(A, regional):
     return residual_matrix
 
 
-def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_right, metro_name='BSB', rest='RestBR'):
+def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_right,
+                                 metro_name='BSB', rest='RestBR', col_interest='massa_salarial_sum'):
     cols = [f'{name}_{col}' for name in [metro_name, rest] for col in upper_left.columns]
     number_of_sectors = 12
     # Create final matrix
@@ -112,38 +113,44 @@ def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_ri
     result_matrix.iloc[:number_of_sectors, number_of_sectors:] = upper_right
     result_matrix.iloc[number_of_sectors:, :number_of_sectors] = bottom_left
     result_matrix.iloc[number_of_sectors:, number_of_sectors:] = bottom_right
+    result_matrix = result_matrix.astype(float)
 
     plt.figure(figsize=(12, 12))
     # Create a heatmap using Seaborn
-    sns.heatmap(result_matrix.astype(float), cmap="viridis", cbar=True)
+    sns.heatmap(result_matrix, cmap="viridis", cbar=True)
     plt.xlabel('Industry of destination')
     plt.ylabel('Industry of origin')
     plt.title('$\\rho$ coefficient')
     plt.xticks(fontsize=12, rotation=90)
     plt.yticks(fontsize=12)
     plt.tight_layout()
+    plt.savefig(f'{metro_name}_{col_interest}.png')
     plt.show()
-    return result_matrix.astype(float)
+    return result_matrix
 
 
-def main(metro_list, metro_name='BSB', rest='RestBR', debug=False):
+def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col_interest='massa_salarial_sum'):
     """ Receives a list of municipalities codes as integer and return the technical matrix and final demand
         for that metro region, plus the rest of Brazil.
         """
+    if not metro_list:
+        acps = pd.read_csv('data/ACPs_MUN_CODES.csv', sep=';')
+        acps['cod_mun'] = acps['cod_mun'].astype(str).str[:6].astype(int)
+        metro_list = acps[acps['ACPs'] == metro_name]['cod_mun'].to_list()
     # A is the technical coefficient matrix. But it can also be final demand matrix
     A_kl = pd.read_csv('data/technical_matrix.csv').set_index('sector')
     # fd is the final demand vectors
     fd = pd.read_csv('data/final_demand.csv')
     # Read the list of all municipalities with code and sum of all salaries per sector
-    massa_salarial = pd.read_csv('data/mun_isis12_2010.csv')
+    massa_salarial = pd.read_csv('data/mun_isic12_2010.csv')
     # Derive the list of the rest of BRAZIL
     rest_list = [code for code in massa_salarial.codemun.to_list() if code not in metro_list]
     # DEBUG
     if debug:
         rest_list = rest_list[:100]
     # Calculate SLQ and lambda for both groups of municipalities
-    slq_me, lbda_me = calculate_slq_k(metro_list, massa_salarial)
-    slq_re, lbda_re = calculate_slq_k(rest_list, massa_salarial)
+    slq_me, lbda_me = calculate_slq_k(metro_list, massa_salarial, gdp_col=col_interest)
+    slq_re, lbda_re = calculate_slq_k(rest_list, massa_salarial, gdp_col=col_interest)
     # Calculate CILQ for both groups of municipalities
     cilq_me = calculate_cilq_kl(slq_me)
     cilq_re = calculate_cilq_kl(slq_re)
@@ -163,15 +170,17 @@ def main(metro_list, metro_name='BSB', rest='RestBR', debug=False):
     A_re_me = calculate_residual_matrix(A_kl, A_me)
     A_me_re = calculate_residual_matrix(A_kl, A_re)
     # Putting it all together and plotting
-    result_matrix = putting_together_full_matrix(A_me, A_me_re, A_re, A_re_me, metro_name, rest)
+    result_matrix = putting_together_full_matrix(A_me, A_me_re, A_re, A_re_me, metro_name, rest, col_interest)
     return result_matrix
 
 
 if __name__ == '__main__':
-    metr = pd.read_csv('data/list_mun_to_matrix.csv')
-    metr_list = metr.codemun.to_list()
-    metr_name = 'BSB'
-    res = main(metr_list, metro_name=metr_name, debug=False)
+    # metr = pd.read_csv('data/list_mun_to_matrix.csv')
+    # metr_list = metr.codemun.to_list()
+    # metr_name = 'BSB'
+    alternative_col = 'qtde_vinc_ativos_sum'
+    metr_name = 'SAO PAULO'
+    res = main(metro_name=metr_name, debug=False, col_interest=alternative_col)
 
     with open(f'matrix_{metr_name}', 'wb') as handler:
         pickle.dump(res, handler)
