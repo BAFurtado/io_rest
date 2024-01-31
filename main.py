@@ -106,13 +106,15 @@ def calculate_residual_matrix(A, regional):
 def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_right,
                                  metro_name='BSB', rest='RestBR', col_interest='massa_salarial_sum'):
     cols = [f'{name}_{col}' for name in [metro_name, rest] for col in upper_left.columns]
-    number_of_sectors = 12
+    idx = [f'{name}_{col}' for name in [metro_name, rest] for col in upper_left.index]
+    number_of_cols = len(upper_left.columns)
+    number_of_sectors = len(upper_left.index)
     # Create final matrix
-    result_matrix = pd.DataFrame(columns=cols, index=cols)
-    result_matrix.iloc[:number_of_sectors, :number_of_sectors] = upper_left
-    result_matrix.iloc[:number_of_sectors, number_of_sectors:] = upper_right
-    result_matrix.iloc[number_of_sectors:, :number_of_sectors] = bottom_left
-    result_matrix.iloc[number_of_sectors:, number_of_sectors:] = bottom_right
+    result_matrix = pd.DataFrame(columns=cols, index=idx)
+    result_matrix.iloc[:number_of_sectors, :number_of_cols] = upper_left
+    result_matrix.iloc[:number_of_sectors, number_of_cols:] = upper_right
+    result_matrix.iloc[number_of_sectors:, :number_of_cols] = bottom_left
+    result_matrix.iloc[number_of_sectors:, number_of_cols:] = bottom_right
     result_matrix = result_matrix.astype(float)
 
     plt.figure(figsize=(12, 12))
@@ -124,7 +126,7 @@ def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_ri
     plt.xticks(fontsize=12, rotation=90)
     plt.yticks(fontsize=12)
     plt.tight_layout()
-    plt.savefig(f'{metro_name}_{col_interest}.png')
+    plt.savefig(f'output/{metro_name}_{col_interest}.png')
     plt.show()
     return result_matrix
 
@@ -192,7 +194,9 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     final_demand = preparing_final_demand()
     final_demand_re = multiply_rho_final_demand(final_demand, rho_re_final)
     final_demand_me = multiply_rho_final_demand(final_demand, rho_me_final)
-
+    # Calculating residuals final demand matrices
+    residual_me = calculate_residual_matrix(final_demand, final_demand_me)
+    residual_re = calculate_residual_matrix(final_demand, final_demand_re)
     # Calculating the deriving matrices
     A_me = calculate_regional_technical_matrix_from_rho(A_kl, rho_me)
     A_re = calculate_regional_technical_matrix_from_rho(A_kl, rho_re)
@@ -201,14 +205,25 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     A_me_re = calculate_residual_matrix(A_kl, A_re)
     # Putting it all together and plotting
     result_matrix = putting_together_full_matrix(A_me, A_me_re, A_re, A_re_me, metro_name, rest, col_interest)
-    return result_matrix
+    # Putting final demand together
+    result_matrix_final_demand = putting_together_full_matrix(final_demand_me, final_demand_re, residual_re,
+                                                              residual_me,
+                                                              metro_name, rest, col_interest)
+    return result_matrix, result_matrix_final_demand
 
 
 if __name__ == '__main__':
+    acps = pd.read_csv('data/ACPs_MUN_CODES.csv', sep=';')['ACPs'].unique().tolist()
+    # Debug:?
+    deb = False
 
-    for each in ['qtde_vinc_ativos_sum', 'massa_salarial_sum']:
-        metr_name = 'IPATINGA'
-        res = main(metro_name=metr_name, debug=False, col_interest=each)
+    for acp in acps:
+        for each in ['qtde_vinc_ativos_sum', 'massa_salarial_sum']:
+            metr_name = acp
+            res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=each)
 
-        with open(f'output/matrix_{metr_name}.json', 'w') as handler:
-            res.to_json(handler, indent=4, orient='index')
+            with open(f'output/matrix_{metr_name}.json', 'w') as handler:
+                res.to_json(handler, indent=4, orient='index')
+
+            with open(f'output/matrix_{metr_name}_final_demand.json', 'w') as handler:
+                res_demand.to_json(handler, indent=4, orient='index')
