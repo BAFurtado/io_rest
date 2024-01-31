@@ -192,7 +192,7 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     final_demand = preparing_final_demand()
     final_demand_re = multiply_rho_final_demand(final_demand, rho_re_final)
     final_demand_me = multiply_rho_final_demand(final_demand, rho_me_final)
-    # TODO: Montar final demand final matrix
+
     # Calculating the deriving matrices
     A_me = calculate_regional_technical_matrix_from_rho(A_kl, rho_me)
     A_re = calculate_regional_technical_matrix_from_rho(A_kl, rho_re)
@@ -205,13 +205,10 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
 
 
 if __name__ == '__main__':
-    # metr = pd.read_csv('data/list_mun_to_matrix.csv')
-    # metr_list = metr.codemun.to_list()
-    # metr_name = 'BSB'
 
     for each in ['qtde_vinc_ativos_sum', 'massa_salarial_sum']:
         metr_name = 'IPATINGA'
         res = main(metro_name=metr_name, debug=False, col_interest=each)
 
-        with open(f'matrix_{metr_name}.json', 'w') as handler:
-            json.dump(res.to_json(), handler, indent=4)
+        with open(f'output/matrix_{metr_name}.json', 'w') as handler:
+            res.to_json(handler, indent=4, orient='index')
