@@ -104,7 +104,8 @@ def calculate_residual_matrix(A, regional):
 
 
 def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_right,
-                                 metro_name='BSB', rest='RestBR', col_interest='massa_salarial_sum'):
+                                 metro_name='BSB', rest='RestBR', col_interest='massa_salarial_sum',
+                                 tipo=''):
     cols = [f'{name}_{col}' for name in [metro_name, rest] for col in upper_left.columns]
     idx = [f'{name}_{col}' for name in [metro_name, rest] for col in upper_left.index]
     number_of_cols = len(upper_left.columns)
@@ -116,7 +117,11 @@ def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_ri
     result_matrix.iloc[number_of_sectors:, :number_of_cols] = bottom_left
     result_matrix.iloc[number_of_sectors:, number_of_cols:] = bottom_right
     result_matrix = result_matrix.astype(float)
+    plot_result_matrix(result_matrix, tipo, metro_name, col_interest)
+    return result_matrix
 
+
+def plot_result_matrix(result_matrix, tipo, metro_name, col_interest):
     plt.figure(figsize=(12, 12))
     # Create a heatmap using Seaborn
     sns.heatmap(result_matrix, cmap="viridis", cbar=True)
@@ -126,8 +131,9 @@ def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_ri
     plt.xticks(fontsize=12, rotation=90)
     plt.yticks(fontsize=12)
     plt.tight_layout()
-    plt.savefig(f'output/{metro_name}_{col_interest}.png')
-    plt.show()
+    plt.savefig(f'output/{tipo}_{metro_name}_{col_interest}.png')
+    # plt.show()
+    plt.close()
     return result_matrix
 
 
@@ -161,6 +167,17 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     """ Receives a list of municipalities codes as integer and return the technical matrix and final demand
         for that metro region, plus the rest of Brazil.
         """
+    try:
+        with open(f'output/matrix_{metr_name}.json', 'r') as handler:
+            result = pd.DataFrame(json.load(handler))
+        plot_result_matrix(result, 'io', metro_name, col_interest)
+        with open(f'output/matrix_{metr_name}_final_demand.json', 'r') as handler:
+            result_demand = pd.DataFrame(json.load(handler))
+        plot_result_matrix(result, 'final_d', metro_name, col_interest)
+        return result, result_demand
+    except FileNotFoundError:
+        pass
+
     if not metro_list:
         acps = pd.read_csv('data/ACPs_MUN_CODES.csv', sep=';')
         acps['cod_mun'] = acps['cod_mun'].astype(str).str[:6].astype(int)
@@ -204,11 +221,11 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     A_re_me = calculate_residual_matrix(A_kl, A_me)
     A_me_re = calculate_residual_matrix(A_kl, A_re)
     # Putting it all together and plotting
-    result_matrix = putting_together_full_matrix(A_me, A_me_re, A_re, A_re_me, metro_name, rest, col_interest)
+    result_matrix = putting_together_full_matrix(A_me, A_me_re, A_re, A_re_me, metro_name, rest, col_interest, tipo='io')
     # Putting final demand together
     result_matrix_final_demand = putting_together_full_matrix(final_demand_me, final_demand_re, residual_re,
                                                               residual_me,
-                                                              metro_name, rest, col_interest)
+                                                              metro_name, rest, col_interest, tipo='final_d')
     return result_matrix, result_matrix_final_demand
 
 
@@ -222,8 +239,8 @@ if __name__ == '__main__':
             metr_name = acp
             res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=each)
 
-            with open(f'output/matrix_{metr_name}.json', 'w') as handler:
-                res.to_json(handler, indent=4, orient='index')
+            with open(f'output/matrix_{metr_name}.json', 'w') as h:
+                res.to_json(h, indent=4, orient='index')
 
-            with open(f'output/matrix_{metr_name}_final_demand.json', 'w') as handler:
-                res_demand.to_json(handler, indent=4, orient='index')
+            with open(f'output/matrix_{metr_name}_final_demand.json', 'w') as h:
+                res_demand.to_json(h, indent=4, orient='index')
