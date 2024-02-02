@@ -171,6 +171,9 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
         with open(f'output/matrix_{metr_name}.json', 'r') as handler:
             result = pd.DataFrame(json.load(handler))
         plot_result_matrix(result, 'io', metro_name, col_interest)
+    except FileNotFoundError:
+        pass
+    try:
         with open(f'output/matrix_{metr_name}_final_demand.json', 'r') as handler:
             result_demand = pd.DataFrame(json.load(handler))
         plot_result_matrix(result, 'final_d', metro_name, col_interest)
@@ -186,15 +189,15 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     A_kl = pd.read_csv('data/technical_matrix.csv').set_index('sector')
 
     # Read the list of all municipalities with code and sum of all salaries per sector
-    massa_salarial = pd.read_csv('data/mun_isic12_2010.csv')
+    file = pd.read_csv('data/mun_isic12_2010.csv')
     # Derive the list of the rest of BRAZIL
-    rest_list = [code for code in massa_salarial.codemun.to_list() if code not in metro_list]
+    rest_list = [code for code in file.codemun.to_list() if code not in metro_list]
     # DEBUG
     if debug:
         rest_list = rest_list[:1000]
     # Calculate SLQ and lambda for both groups of municipalities
-    slq_me, lbda_me = calculate_slq_k(metro_list, massa_salarial, gdp_col=col_interest)
-    slq_re, lbda_re = calculate_slq_k(rest_list, massa_salarial, gdp_col=col_interest)
+    slq_me, lbda_me = calculate_slq_k(metro_list, file, gdp_col=col_interest)
+    slq_re, lbda_re = calculate_slq_k(rest_list, file, gdp_col=col_interest)
     # Calculate CILQ for both groups of municipalities
     cilq_me = calculate_cilq_kl(slq_me)
     cilq_re = calculate_cilq_kl(slq_re)
@@ -209,8 +212,8 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     rho_re_final = np.diag(flq_re.values)
     # Get final demand columns to produce region specific matrix
     final_demand = preparing_final_demand()
-    final_demand_re = multiply_rho_final_demand(final_demand, rho_re_final)
     final_demand_me = multiply_rho_final_demand(final_demand, rho_me_final)
+    final_demand_re = multiply_rho_final_demand(final_demand, rho_re_final)
     # Calculating residuals final demand matrices
     residual_me = calculate_residual_matrix(final_demand, final_demand_me)
     residual_re = calculate_residual_matrix(final_demand, final_demand_re)
@@ -221,11 +224,17 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     A_re_me = calculate_residual_matrix(A_kl, A_me)
     A_me_re = calculate_residual_matrix(A_kl, A_re)
     # Putting it all together and plotting
-    result_matrix = putting_together_full_matrix(A_me, A_me_re, A_re, A_re_me, metro_name, rest, col_interest, tipo='io')
+    result_matrix = putting_together_full_matrix(A_me, A_me_re,
+                                                 A_re_me, A_re,
+                                                 metro_name, rest,
+                                                 col_interest,
+                                                 tipo='io')
     # Putting final demand together
-    result_matrix_final_demand = putting_together_full_matrix(final_demand_me, final_demand_re, residual_re,
-                                                              residual_me,
-                                                              metro_name, rest, col_interest, tipo='final_d')
+    result_matrix_final_demand = putting_together_full_matrix(final_demand_me, residual_re,
+                                                              residual_me, final_demand_re,
+                                                              metro_name, rest,
+                                                              col_interest,
+                                                              tipo='final_d')
     return result_matrix, result_matrix_final_demand
 
 
