@@ -104,8 +104,7 @@ def calculate_residual_matrix(A, regional):
 
 
 def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_right,
-                                 metro_name='BSB', rest='RestBR', col_interest='massa_salarial_sum',
-                                 tipo=''):
+                                 metro_name='BSB', rest='RestBR'):
     cols = [f'{name}_{col}' for name in [metro_name, rest] for col in upper_left.columns]
     idx = [f'{name}_{col}' for name in [metro_name, rest] for col in upper_left.index]
     number_of_cols = len(upper_left.columns)
@@ -117,7 +116,6 @@ def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_ri
     result_matrix.iloc[number_of_sectors:, :number_of_cols] = bottom_left
     result_matrix.iloc[number_of_sectors:, number_of_cols:] = bottom_right
     result_matrix = result_matrix.astype(float)
-    plot_result_matrix(result_matrix, tipo, metro_name, col_interest)
     return result_matrix
 
 
@@ -221,35 +219,36 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     A_me = calculate_regional_technical_matrix_from_rho(A_kl, rho_me)
     A_re = calculate_regional_technical_matrix_from_rho(A_kl, rho_re)
     # Calculating residuals matrices
-    A_re_me = calculate_residual_matrix(A_kl, A_me)
-    A_me_re = calculate_residual_matrix(A_kl, A_re)
+    A_re_me = calculate_residual_matrix(A_me, A_kl)
+    A_me_re = calculate_residual_matrix(A_re, A_kl)
     # Putting it all together and plotting
     result_matrix = putting_together_full_matrix(A_me, A_me_re,
                                                  A_re_me, A_re,
-                                                 metro_name, rest,
-                                                 col_interest,
-                                                 tipo='io')
+                                                 metro_name, rest)
+    plot_result_matrix(result_matrix, 'io', metro_name, col_interest)
     # Putting final demand together
-    result_matrix_final_demand = putting_together_full_matrix(final_demand_me, residual_re,
-                                                              residual_me, final_demand_re,
-                                                              metro_name, rest,
-                                                              col_interest,
-                                                              tipo='final_d')
+    result_matrix_final_demand = putting_together_full_matrix(final_demand_me, residual_me,
+                                                              residual_re, final_demand_re,
+                                                              metro_name, rest)
+    plot_result_matrix(result_matrix_final_demand, 'final_d', metro_name, col_interest)
     return result_matrix, result_matrix_final_demand
 
 
 if __name__ == '__main__':
-    acps = pd.read_csv('data/ACPs_MUN_CODES.csv', sep=';')['ACPs'].unique().tolist()
+    metr_name = 'BRASILIA'
+    col_interest = 'massa_salarial_sum'   
     # Debug:?
     deb = False
+    res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=col_interest)
 
-    for acp in acps:
-        for each in ['qtde_vinc_ativos_sum', 'massa_salarial_sum']:
-            metr_name = acp
-            res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=each)
-
-            with open(f'output/matrix_{metr_name}.json', 'w') as h:
-                res.to_json(h, indent=4, orient='index')
-
-            with open(f'output/matrix_{metr_name}_final_demand.json', 'w') as h:
-                res_demand.to_json(h, indent=4, orient='index')
+    # acps_ = pd.read_csv('data/ACPs_MUN_CODES.csv', sep=';')['ACPs'].unique().tolist()
+    # for acp in acps_:
+    #     for each in ['qtde_vinc_ativos_sum', 'massa_salarial_sum']:
+    #         metr_name = acp
+    #         res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=each)
+    #
+    #         with open(f'output/matrix_{metr_name}.json', 'w') as h:
+    #             res.to_json(h, indent=4, orient='index')
+    #
+    #         with open(f'output/matrix_{metr_name}_final_demand.json', 'w') as h:
+    #             res_demand.to_json(h, indent=4, orient='index')
