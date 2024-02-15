@@ -219,8 +219,8 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     A_me = calculate_regional_technical_matrix_from_rho(A_kl, rho_me)
     A_re = calculate_regional_technical_matrix_from_rho(A_kl, rho_re)
     # Calculating residuals matrices
-    A_re_me = calculate_residual_matrix(A_me, A_kl)
-    A_me_re = calculate_residual_matrix(A_re, A_kl)
+    A_re_me = calculate_residual_matrix(A_kl, A_me)
+    A_me_re = calculate_residual_matrix(A_kl, A_re)
     # Putting it all together and plotting
     result_matrix = putting_together_full_matrix(A_me, A_me_re,
                                                  A_re_me, A_re,
@@ -235,20 +235,21 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
 
 
 if __name__ == '__main__':
-    metr_name = 'BRASILIA'
-    col_interest = 'massa_salarial_sum'   
-    # Debug:?
-    deb = False
-    res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=col_interest)
+    # metr_name = 'BRASILIA'
+    # col_interest = 'massa_salarial_sum'
+    # # Debug:?
+    # deb = False
+    # res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=col_interest)
 
-    # acps_ = pd.read_csv('data/ACPs_MUN_CODES.csv', sep=';')['ACPs'].unique().tolist()
-    # for acp in acps_:
-    #     for each in ['qtde_vinc_ativos_sum', 'massa_salarial_sum']:
-    #         metr_name = acp
-    #         res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=each)
-    #
-    #         with open(f'output/matrix_{metr_name}.json', 'w') as h:
-    #             res.to_json(h, indent=4, orient='index')
-    #
-    #         with open(f'output/matrix_{metr_name}_final_demand.json', 'w') as h:
-    #             res_demand.to_json(h, indent=4, orient='index')
+    deb = False
+    acps_ = pd.read_csv('data/ACPs_MUN_CODES.csv', sep=';')['ACPs'].unique().tolist()
+    for acp in acps_:
+        for each in ['qtde_vinc_ativos_sum', 'massa_salarial_sum']:
+            metr_name = acp
+            res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=each)
+
+            with open(f'output/matrix_{metr_name}.json', 'w') as h:
+                res.to_json(h, indent=4, orient='index')
+
+            with open(f'output/matrix_{metr_name}_final_demand.json', 'w') as h:
+                res_demand.to_json(h, indent=4, orient='index')
