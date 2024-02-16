@@ -1,5 +1,6 @@
 import json
 import math
+import os
 from collections import defaultdict
 from typing import List
 
@@ -129,6 +130,8 @@ def plot_result_matrix(result_matrix, tipo, metro_name, col_interest):
     plt.xticks(fontsize=12, rotation=90)
     plt.yticks(fontsize=12)
     plt.tight_layout()
+    if not os.path.exists('output'):
+        os.makedirs('output')
     plt.savefig(f'output/{tipo}_{metro_name}_{col_interest}.png')
     # plt.show()
     plt.close()
