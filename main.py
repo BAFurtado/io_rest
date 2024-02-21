@@ -169,13 +169,13 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
         for that metro region, plus the rest of Brazil.
         """
     try:
-        with open(f'output/matrix_{metr_name}.json', 'r') as handler:
+        with open(f'output/matrix_io_{metr_name}_{col_interest}.json', 'r') as handler:
             result = pd.DataFrame(json.load(handler))
         plot_result_matrix(result, 'io', metro_name, col_interest)
     except FileNotFoundError:
         pass
     try:
-        with open(f'output/matrix_{metr_name}_final_demand.json', 'r') as handler:
+        with open(f'output/matrix_final_demand_{metr_name}_{col_interest}.json', 'r') as handler:
             result_demand = pd.DataFrame(json.load(handler))
         plot_result_matrix(result, 'final_d', metro_name, col_interest)
         return result, result_demand
@@ -251,8 +251,8 @@ if __name__ == '__main__':
             metr_name = acp
             res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=each)
 
-            with open(f'output/matrix_{metr_name}.json', 'w') as h:
+            with open(f'output/matrix_io_{metr_name}_{each}.json', 'w') as h:
                 res.to_json(h, indent=4, orient='index')
 
-            with open(f'output/matrix_{metr_name}_final_demand.json', 'w') as h:
+            with open(f'output/matrix_final_demand_{metr_name}_{each}.json', 'w') as h:
                 res_demand.to_json(h, indent=4, orient='index')
