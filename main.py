@@ -30,13 +30,12 @@ def calculate_slq_k(list_regions: List[int],
     lambda_ = defaultdict(float)
     y_k_r, y_r, y_n_k, y_n = defaultdict(float), 1, defaultdict(float), 1
     # Each sector is each k industry
-    # TODO: Vericar alterações aqui: troca da lógica para pandas e
-    #       Verificar se estava realmente pegando apenas a primeira linha dos mni do resto de BR
     for sector in y[classification_col].unique():
         y_k_r[sector] = y.loc[(y[region_col].isin(list_regions)) & (y[classification_col] == sector)][gdp_col].sum()
-        y_n_k[sector] = y.loc[(y[classification_col] == sector)][gdp_col].sum()    
+        y_n_k[sector] = y.loc[(y[classification_col] == sector)][gdp_col].sum()
     y_r = sum(y_k_r.values())
-    y_n = sum(y_n_k.values()) # TODO: Check why national total is less than local total 
+    y_n = sum(y_n_k.values())
+    assert y_n > y_r
     for sector in y[classification_col].unique():
         SLQ_r = (y_k_r[sector] / y_r) / (y_n_k[sector] / y_n)
         output.loc[sector, 'SLQ'] = SLQ_r
@@ -92,6 +91,7 @@ def calculate_regional_technical_matrix_from_rho(A, rho):
             reg_matrix.loc[k, l] = A.loc[k, l] * rho.loc[k, l]
     return reg_matrix
 
+
 def calculate_residual_matrix(A, regional):
     residual_matrix = pd.DataFrame(columns=A.columns)
     for k in A.index:
@@ -117,9 +117,9 @@ def putting_together_full_matrix(upper_left, upper_right, bottom_left, bottom_ri
 
 
 def plot_result_matrix(result_matrix, tipo, metro_name, col_interest):
-    names={'io':'Technical coeficients',
-           'final_d':'Final demand',
-           'rho':'$\\rho$ coefficient'}
+    names = {'io': 'Technical coeficients',
+             'final_d': 'Final demand',
+             'rho': '$\\rho$ coefficient'}
     plt.figure(figsize=(12, 12))
     # Create a heatmap using Seaborn
     sns.heatmap(result_matrix, cmap="crest", cbar=True)
@@ -161,7 +161,7 @@ def multiply_rho_final_demand(final_demand, rho):
     """ Multiply f^r_k / f^r -> percentage by sector per region"""
     new_final_demand = final_demand.copy()
     for col in new_final_demand.columns:
-        new_final_demand.loc[:, col] = final_demand[col] * np.array(rho,dtype=float)
+        new_final_demand.loc[:, col] = final_demand[col] * np.array(rho, dtype=float)
         return new_final_demand
 
 
@@ -214,7 +214,8 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     rho_re_final = np.diag(flq_re.values)
     # Get final demand columns to produce region specific matrix
     final_demand = preparing_final_demand()
-    final_demand_me = multiply_rho_final_demand(final_demand, rho_me_final) #TODO: Check wether this is right according to the paper
+    # TODO: Check whether this is right according to the paper
+    final_demand_me = multiply_rho_final_demand(final_demand, rho_me_final)
     final_demand_re = multiply_rho_final_demand(final_demand, rho_re_final)
     # Calculating residuals final demand matrices
     residual_me = calculate_residual_matrix(final_demand, final_demand_me)
@@ -227,9 +228,9 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     A_me_re = calculate_residual_matrix(A_kl, A_re)
     # Putting it all together and plotting
     # rho matrix
-    result_rho_matrix = putting_together_full_matrix(rho_me, 1-rho_me,
-                                                 1-rho_re, rho_re,
-                                                 metro_name, rest)
+    result_rho_matrix = putting_together_full_matrix(rho_me, 1 - rho_me,
+                                                     1 - rho_re, rho_re,
+                                                     metro_name, rest)
     plot_result_matrix(result_rho_matrix, 'rho', metro_name, col_interest)
     # Putting tech coef together and plotting
     result_matrix = putting_together_full_matrix(A_me, A_me_re,
@@ -253,9 +254,9 @@ if __name__ == '__main__':
     os.chdir(os.path.dirname(__file__))
     deb = False
     acps_ = pd.read_csv('data/ACPs_MUN_CODES.csv', sep=';')['ACPs'].unique().tolist()
-    #acps_=['BRASILIA','SAO PAULO','BELO HORIZONTE']
+    # acps_=['BRASILIA','SAO PAULO','BELO HORIZONTE']
     for acp in acps_:
-        for each in ['massa_salarial_sum']:# ['qtde_vinc_ativos_sum', 'massa_salarial_sum']:
+        for each in ['massa_salarial_sum']:  # ['qtde_vinc_ativos_sum', 'massa_salarial_sum']:
             metr_name = acp
             res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=each)
 
