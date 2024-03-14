@@ -30,22 +30,18 @@ def calculate_slq_k(list_regions: List[int],
     lambda_ = defaultdict(float)
     y_k_r, y_r, y_n_k, y_n = defaultdict(float), 1, defaultdict(float), 1
     # Each sector is each k industry
+    # TODO: Vericar alterações aqui: troca da lógica para pandas e
+    #       Verificar se estava realmente pegando apenas a primeira linha dos mni do resto de BR
     for sector in y[classification_col].unique():
-        for region in list_regions:
-            try:
-                y_k_r[sector] += y.loc[(y[region_col] == region)
-                                       & (y[classification_col] == sector)][gdp_col].reset_index().loc[0, gdp_col]
-            except KeyError:
-                # Missing sector for this municipality
-                pass
-        y_n_k[sector] += y.loc[y[classification_col] == sector][gdp_col].reset_index().loc[0, gdp_col]
-    y_r = sum(y_k_r.values())
-    y_n = sum(y_n_k.values())
+        y_k_r[sector] = y.loc[(y[region_col].isin(list_regions)) & (y[classification_col] == sector)][gdp_col].sum()
+        y_n_k[sector] = y.loc[(y[classification_col] == sector)][gdp_col].sum()     y_r = sum(y_k_r.values())
+    y_n = sum(y_n_k.values()) # TODO: Check why national total is less than local total 
     for sector in y[classification_col].unique():
         SLQ_r = (y_k_r[sector] / y_r) / (y_n_k[sector] / y_n)
         output.loc[sector, 'SLQ'] = SLQ_r
         print(f'SLQ_{sector} = {SLQ_r}')
         lambda_[sector] = calculate_lambda(y_r, y_n)
+
     lambda_ = pd.DataFrame.from_dict(lambda_, orient='index', columns=['lambda'])
     return output, lambda_
 
@@ -94,6 +90,37 @@ def calculate_regional_technical_matrix_from_rho(A, rho):
         for l in A.columns:
             reg_matrix.loc[k, l] = A.loc[k, l] * rho.loc[k, l]
     return reg_matrix
+
+def plot_rho_matrix(rho_me,rho_re,metro_name,rest,col_interest): #TODO: Not working yet
+    plt.figure(figsize=(12, 12))
+    # Create a heatmap using Seaborn
+    def build_matrix(upper_left, bottom_right):
+        cols = [f'{name}_{col}' for name in [metro_name, rest] for col in upper_left.columns]
+        idx = [f'{name}_{col}' for name in [metro_name, rest] for col in upper_left.index]
+        number_of_cols = len(upper_left.columns)
+        number_of_sectors = len(upper_left.index)
+        # Create final matrix
+        result_matrix = pd.DataFrame(columns=cols, index=idx)
+        result_matrix.iloc[:number_of_sectors, :number_of_cols] = upper_left
+        result_matrix.iloc[:number_of_sectors, number_of_cols:] = 1-bottom_right
+        result_matrix.iloc[number_of_sectors:, :number_of_cols] = 1-upper_left
+        result_matrix.iloc[number_of_sectors:, number_of_cols:] = bottom_right
+        result_matrix = result_matrix.astype(float)
+        return result_matrix
+    result_matrix=build_matrix(rho_me,rho_re)
+    sns.heatmap(result_matrix, cmap="viridis", cbar=True)
+    plt.xlabel('Industry of destination')
+    plt.ylabel('Industry of origin')
+    plt.title('$\\rho$ coefficient')
+    plt.xticks(fontsize=12, rotation=90)
+    plt.yticks(fontsize=12)
+    plt.tight_layout()
+    
+    if not os.path.exists('output'):
+        os.makedirs('output')
+    plt.savefig(f'output/rho_{metro_name}_{col_interest}.png')
+    plt.close()
+    return result_matrix
 
 
 def calculate_residual_matrix(A, regional):
@@ -159,15 +186,18 @@ def preparing_final_demand():
 
 
 def multiply_rho_final_demand(final_demand, rho):
-    for col in final_demand.columns:
-        final_demand.loc[:, col] = final_demand[col] * rho
-    return final_demand
+    """ Multiply f^r_k / f^r -> percentage by sector per region"""
+    new_final_demand = final_demand.copy()
+    for col in new_final_demand.columns:
+        new_final_demand.loc[:, col] = final_demand[col] * rho
+    return new_final_demand
 
 
 def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col_interest='massa_salarial_sum'):
     """ Receives a list of municipalities codes as integer and return the technical matrix and final demand
         for that metro region, plus the rest of Brazil.
         """
+    
     try:
         with open(f'output/matrix_io_{metr_name}_{col_interest}.json', 'r') as handler:
             result = pd.DataFrame(json.load(handler))
@@ -192,10 +222,10 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     # Read the list of all municipalities with code and sum of all salaries per sector
     file = pd.read_csv('data/mun_isic12_2010.csv')
     # Derive the list of the rest of BRAZIL
-    rest_list = [code for code in file.codemun.to_list() if code not in metro_list]
+    rest_list = set([code for code in file.codemun.to_list() if code not in metro_list])
     # DEBUG
     if debug:
-        rest_list = rest_list[:1000]
+        rest_list = list(rest_list)[:100]
     # Calculate SLQ and lambda for both groups of municipalities
     slq_me, lbda_me = calculate_slq_k(metro_list, file, gdp_col=col_interest)
     slq_re, lbda_re = calculate_slq_k(rest_list, file, gdp_col=col_interest)
@@ -208,6 +238,7 @@ def main(metro_list=None, metro_name='BRASILIA', rest='RestBR', debug=False, col
     # Calculate RHO for both groups of municipalities
     rho_me = calculate_rho(flq_me)
     rho_re = calculate_rho(flq_re)
+    plot_rho_matrix(rho_me,rho_re,metro_name,rest,col_interest)
     # Calculate rho final demand for both groups
     rho_me_final = np.diag(flq_me.values)
     rho_re_final = np.diag(flq_re.values)
@@ -243,11 +274,12 @@ if __name__ == '__main__':
     # # Debug:?
     # deb = False
     # res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=col_interest)
-
+    os.chdir(os.path.dirname(__file__))
     deb = False
     acps_ = pd.read_csv('data/ACPs_MUN_CODES.csv', sep=';')['ACPs'].unique().tolist()
+    #acps_=['BRASILIA','SAO PAULO','BELO HORIZONTE']
     for acp in acps_:
-        for each in ['qtde_vinc_ativos_sum', 'massa_salarial_sum']:
+        for each in ['massa_salarial_sum']:# ['qtde_vinc_ativos_sum', 'massa_salarial_sum']:
             metr_name = acp
             res, res_demand = main(metro_name=metr_name, debug=deb, col_interest=each)
 
