@@ -1,50 +1,50 @@
 {
     "RECIFE_Agriculture":{
         "RECIFE_Export":0.0902789833,
-        "RECIFE_GovernmentConsumption":0.0000328526,
+        "RECIFE_GovernmentConsumption":0.000192965,
         "RECIFE_ConsumptionNGOs":0.0,
-        "RECIFE_HouseholdConsumption":0.0724971149,
-        "RECIFE_FBCFixo":0.0103743862,
+        "RECIFE_HouseholdConsumption":0.4258233175,
+        "RECIFE_FBCFixo":0.0609356048,
         "RestBR_Export":0.4399889624,
-        "RestBR_GovernmentConsumption":0.0001601124,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.3533262026,
-        "RestBR_FBCFixo":0.0505612186
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "RECIFE_Mining":{
         "RECIFE_Export":0.5843272423,
         "RECIFE_GovernmentConsumption":0.0,
         "RECIFE_ConsumptionNGOs":0.0,
         "RECIFE_HouseholdConsumption":0.0,
-        "RECIFE_FBCFixo":0.0537726,
+        "RECIFE_FBCFixo":0.0792178305,
         "RestBR_Export":0.2765040445,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.0254452305
+        "RestBR_FBCFixo":0.0
     },
     "RECIFE_Manufacturing":{
         "RECIFE_Export":0.2445986716,
-        "RECIFE_GovernmentConsumption":0.0026101994,
+        "RECIFE_GovernmentConsumption":0.0031928989,
         "RECIFE_ConsumptionNGOs":0.0,
-        "RECIFE_HouseholdConsumption":0.4679931908,
-        "RECIFE_FBCFixo":0.1163060001,
+        "RECIFE_HouseholdConsumption":0.5724677527,
+        "RECIFE_FBCFixo":0.1422700924,
         "RestBR_Export":0.0546040831,
-        "RestBR_GovernmentConsumption":0.0005826996,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.1044745619,
-        "RestBR_FBCFixo":0.0259640923
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "RECIFE_Utilities":{
         "RECIFE_Export":0.000018605,
         "RECIFE_GovernmentConsumption":0.0,
         "RECIFE_ConsumptionNGOs":0.0,
-        "RECIFE_HouseholdConsumption":0.4666452971,
+        "RECIFE_HouseholdConsumption":0.9956038504,
         "RECIFE_FBCFixo":0.0,
         "RestBR_Export":0.0000210894,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.5289585532,
+        "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
     },
     "RECIFE_Construction":{
@@ -52,59 +52,59 @@
         "RECIFE_GovernmentConsumption":0.0,
         "RECIFE_ConsumptionNGOs":0.0,
         "RECIFE_HouseholdConsumption":0.0,
-        "RECIFE_FBCFixo":0.71888418,
+        "RECIFE_FBCFixo":0.9912930344,
         "RestBR_Export":0.0023926876,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.2724088545
+        "RestBR_FBCFixo":0.0
     },
     "RECIFE_Trade":{
         "RECIFE_Export":0.007171483,
-        "RECIFE_GovernmentConsumption":0.00146472,
+        "RECIFE_GovernmentConsumption":0.0053143586,
         "RECIFE_ConsumptionNGOs":0.0,
-        "RECIFE_HouseholdConsumption":0.2417274985,
-        "RECIFE_FBCFixo":0.0252518766,
+        "RECIFE_HouseholdConsumption":0.8770458483,
+        "RECIFE_FBCFixo":0.0916199178,
         "RestBR_Export":0.0188483923,
-        "RestBR_GovernmentConsumption":0.0038496386,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.6353183497,
-        "RestBR_FBCFixo":0.0663680412
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "RECIFE_Transport":{
         "RECIFE_Export":0.0830774599,
-        "RECIFE_GovernmentConsumption":0.0002193418,
+        "RECIFE_GovernmentConsumption":0.0004101234,
         "RECIFE_ConsumptionNGOs":0.0,
-        "RECIFE_HouseholdConsumption":0.4365643923,
-        "RECIFE_FBCFixo":0.0149576928,
+        "RECIFE_HouseholdConsumption":0.8162845463,
+        "RECIFE_FBCFixo":0.0279677722,
         "RestBR_Export":0.0722600982,
-        "RestBR_GovernmentConsumption":0.0001907817,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.379720154,
-        "RestBR_FBCFixo":0.0130100794
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "RECIFE_Business":{
         "RECIFE_Export":0.0209883094,
         "RECIFE_GovernmentConsumption":0.0,
         "RECIFE_ConsumptionNGOs":0.0,
-        "RECIFE_HouseholdConsumption":0.3129506847,
-        "RECIFE_FBCFixo":0.1895475459,
+        "RECIFE_HouseholdConsumption":0.597303194,
+        "RECIFE_FBCFixo":0.3617737878,
         "RestBR_Export":0.0190703479,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.2843525093,
-        "RestBR_FBCFixo":0.1722262419
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "RECIFE_Financial":{
         "RECIFE_Export":0.0259438745,
-        "RECIFE_GovernmentConsumption":0.0036483574,
+        "RECIFE_GovernmentConsumption":0.0071596118,
         "RECIFE_ConsumptionNGOs":0.0,
-        "RECIFE_HouseholdConsumption":0.4799825151,
+        "RECIFE_HouseholdConsumption":0.9419275935,
         "RECIFE_FBCFixo":0.0,
         "RestBR_Export":0.0249689202,
-        "RestBR_GovernmentConsumption":0.0035112544,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.4619450784,
+        "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
     },
     "RECIFE_Realestate":{
@@ -121,24 +121,24 @@
     },
     "RECIFE_OtherServices":{
         "RECIFE_Export":0.0080740679,
-        "RECIFE_GovernmentConsumption":0.0047064305,
-        "RECIFE_ConsumptionNGOs":0.0117118244,
-        "RECIFE_HouseholdConsumption":0.0863408896,
-        "RECIFE_FBCFixo":0.0067859724,
+        "RECIFE_GovernmentConsumption":0.0400141397,
+        "RECIFE_ConsumptionNGOs":0.0995740993,
+        "RECIFE_HouseholdConsumption":0.7340714852,
+        "RECIFE_FBCFixo":0.0576944348,
         "RestBR_Export":0.0605717732,
-        "RestBR_GovernmentConsumption":0.0353077092,
-        "RestBR_ConsumptionNGOs":0.0878622749,
-        "RestBR_HouseholdConsumption":0.6477305955,
-        "RestBR_FBCFixo":0.0509084624
+        "RestBR_GovernmentConsumption":0.0,
+        "RestBR_ConsumptionNGOs":0.0,
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "RECIFE_Government":{
         "RECIFE_Export":0.0,
-        "RECIFE_GovernmentConsumption":0.4533843159,
+        "RECIFE_GovernmentConsumption":1.0,
         "RECIFE_ConsumptionNGOs":0.0,
         "RECIFE_HouseholdConsumption":0.0,
         "RECIFE_FBCFixo":0.0,
         "RestBR_Export":0.0,
-        "RestBR_GovernmentConsumption":0.5466156841,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
@@ -160,24 +160,24 @@
         "RECIFE_GovernmentConsumption":0.0,
         "RECIFE_ConsumptionNGOs":0.0,
         "RECIFE_HouseholdConsumption":0.0,
-        "RECIFE_FBCFixo":0.0004224549,
+        "RECIFE_FBCFixo":0.0,
         "RestBR_Export":0.8562406238,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.0787953756
+        "RestBR_FBCFixo":0.0792178305
     },
     "RestBR_Manufacturing":{
         "RECIFE_Export":0.0030025702,
-        "RECIFE_GovernmentConsumption":0.0000320415,
+        "RECIFE_GovernmentConsumption":0.0,
         "RECIFE_ConsumptionNGOs":0.0,
-        "RECIFE_HouseholdConsumption":0.0057448488,
-        "RECIFE_FBCFixo":0.0014277139,
+        "RECIFE_HouseholdConsumption":0.0,
+        "RECIFE_FBCFixo":0.0,
         "RestBR_Export":0.2962001845,
-        "RestBR_GovernmentConsumption":0.0031608575,
+        "RestBR_GovernmentConsumption":0.0031928989,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.5667229039,
-        "RestBR_FBCFixo":0.1408423785
+        "RestBR_HouseholdConsumption":0.5724677527,
+        "RestBR_FBCFixo":0.1422700924
     },
     "RestBR_Utilities":{
         "RECIFE_Export":0.0,
@@ -196,12 +196,12 @@
         "RECIFE_GovernmentConsumption":0.0,
         "RECIFE_ConsumptionNGOs":0.0,
         "RECIFE_HouseholdConsumption":0.0,
-        "RECIFE_FBCFixo":0.0068458795,
+        "RECIFE_FBCFixo":0.0,
         "RestBR_Export":0.0086468352,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.9844471549
+        "RestBR_FBCFixo":0.9912930344
     },
     "RestBR_Trade":{
         "RECIFE_Export":0.0,
@@ -217,27 +217,27 @@
     },
     "RestBR_Transport":{
         "RECIFE_Export":0.0000701847,
-        "RECIFE_GovernmentConsumption":0.0000001853,
+        "RECIFE_GovernmentConsumption":0.0,
         "RECIFE_ConsumptionNGOs":0.0,
-        "RECIFE_HouseholdConsumption":0.0003688143,
-        "RECIFE_FBCFixo":0.0000126364,
+        "RECIFE_HouseholdConsumption":0.0,
+        "RECIFE_FBCFixo":0.0,
         "RestBR_Export":0.1552673733,
-        "RestBR_GovernmentConsumption":0.0004099381,
+        "RestBR_GovernmentConsumption":0.0004101234,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.815915732,
-        "RestBR_FBCFixo":0.0279551358
+        "RestBR_HouseholdConsumption":0.8162845463,
+        "RestBR_FBCFixo":0.0279677722
     },
     "RestBR_Business":{
         "RECIFE_Export":0.0000033244,
         "RECIFE_GovernmentConsumption":0.0,
         "RECIFE_ConsumptionNGOs":0.0,
-        "RECIFE_HouseholdConsumption":0.0000495691,
-        "RECIFE_FBCFixo":0.0000300229,
+        "RECIFE_HouseholdConsumption":0.0,
+        "RECIFE_FBCFixo":0.0,
         "RestBR_Export":0.0400553329,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.5972536249,
-        "RestBR_FBCFixo":0.3617437649
+        "RestBR_HouseholdConsumption":0.597303194,
+        "RestBR_FBCFixo":0.3617737878
     },
     "RestBR_Financial":{
         "RECIFE_Export":0.0,
@@ -255,12 +255,12 @@
         "RECIFE_Export":0.0002626288,
         "RECIFE_GovernmentConsumption":0.0,
         "RECIFE_ConsumptionNGOs":0.0,
-        "RECIFE_HouseholdConsumption":0.0231164987,
+        "RECIFE_HouseholdConsumption":0.0,
         "RECIFE_FBCFixo":0.0,
         "RestBR_Export":0.010970846,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.9656500264,
+        "RestBR_HouseholdConsumption":0.9887665251,
         "RestBR_FBCFixo":0.0
     },
     "RestBR_OtherServices":{

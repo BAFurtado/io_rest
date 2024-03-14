@@ -1,50 +1,50 @@
 {
     "FLORIANOPOLIS_Agriculture":{
         "FLORIANOPOLIS_Export":0.0338900526,
-        "FLORIANOPOLIS_GovernmentConsumption":0.0000123326,
+        "FLORIANOPOLIS_GovernmentConsumption":0.000192965,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
-        "FLORIANOPOLIS_HouseholdConsumption":0.0272148727,
-        "FLORIANOPOLIS_FBCFixo":0.0038944667,
+        "FLORIANOPOLIS_HouseholdConsumption":0.4258233175,
+        "FLORIANOPOLIS_FBCFixo":0.0609356048,
         "RestBR_Export":0.4963778932,
-        "RestBR_GovernmentConsumption":0.0001806324,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.3986084449,
-        "RestBR_FBCFixo":0.0570411381
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "FLORIANOPOLIS_Mining":{
         "FLORIANOPOLIS_Export":0.505347568,
         "FLORIANOPOLIS_GovernmentConsumption":0.0,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
         "FLORIANOPOLIS_HouseholdConsumption":0.0,
-        "FLORIANOPOLIS_FBCFixo":0.0465045109,
+        "FLORIANOPOLIS_FBCFixo":0.0792178305,
         "RestBR_Export":0.3554837187,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.0327133196
+        "RestBR_FBCFixo":0.0
     },
     "FLORIANOPOLIS_Manufacturing":{
         "FLORIANOPOLIS_Export":0.1056055164,
-        "FLORIANOPOLIS_GovernmentConsumption":0.001126954,
+        "FLORIANOPOLIS_GovernmentConsumption":0.0031928989,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
-        "FLORIANOPOLIS_HouseholdConsumption":0.2020561366,
-        "FLORIANOPOLIS_FBCFixo":0.0502151345,
+        "FLORIANOPOLIS_HouseholdConsumption":0.5724677527,
+        "FLORIANOPOLIS_FBCFixo":0.1422700924,
         "RestBR_Export":0.1935972383,
-        "RestBR_GovernmentConsumption":0.0020659449,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.3704116161,
-        "RestBR_FBCFixo":0.0920549579
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "FLORIANOPOLIS_Utilities":{
         "FLORIANOPOLIS_Export":0.0000149477,
         "FLORIANOPOLIS_GovernmentConsumption":0.0,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
-        "FLORIANOPOLIS_HouseholdConsumption":0.3749156937,
+        "FLORIANOPOLIS_HouseholdConsumption":0.9956038504,
         "FLORIANOPOLIS_FBCFixo":0.0,
         "RestBR_Export":0.0000247466,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.6206881567,
+        "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
     },
     "FLORIANOPOLIS_Construction":{
@@ -52,59 +52,59 @@
         "FLORIANOPOLIS_GovernmentConsumption":0.0,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
         "FLORIANOPOLIS_HouseholdConsumption":0.0,
-        "FLORIANOPOLIS_FBCFixo":0.8051850126,
+        "FLORIANOPOLIS_FBCFixo":0.9912930344,
         "RestBR_Export":0.0016346691,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.1861080219
+        "RestBR_FBCFixo":0.0
     },
     "FLORIANOPOLIS_Trade":{
         "FLORIANOPOLIS_Export":0.0028320515,
-        "FLORIANOPOLIS_GovernmentConsumption":0.0005784246,
+        "FLORIANOPOLIS_GovernmentConsumption":0.0053143586,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
-        "FLORIANOPOLIS_HouseholdConsumption":0.0954592964,
-        "FLORIANOPOLIS_FBCFixo":0.0099720817,
+        "FLORIANOPOLIS_HouseholdConsumption":0.8770458483,
+        "FLORIANOPOLIS_FBCFixo":0.0916199178,
         "RestBR_Export":0.0231878238,
-        "RestBR_GovernmentConsumption":0.004735934,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.7815865519,
-        "RestBR_FBCFixo":0.0816478361
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "FLORIANOPOLIS_Transport":{
         "FLORIANOPOLIS_Export":0.0785831821,
-        "FLORIANOPOLIS_GovernmentConsumption":0.0002074759,
+        "FLORIANOPOLIS_GovernmentConsumption":0.0004101234,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
-        "FLORIANOPOLIS_HouseholdConsumption":0.4129473772,
-        "FLORIANOPOLIS_FBCFixo":0.01414852,
+        "FLORIANOPOLIS_HouseholdConsumption":0.8162845463,
+        "FLORIANOPOLIS_FBCFixo":0.0279677722,
         "RestBR_Export":0.0767543759,
-        "RestBR_GovernmentConsumption":0.0002026475,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.4033371691,
-        "RestBR_FBCFixo":0.0138192523
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "FLORIANOPOLIS_Business":{
         "FLORIANOPOLIS_Export":0.0181868604,
         "FLORIANOPOLIS_GovernmentConsumption":0.0,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
-        "FLORIANOPOLIS_HouseholdConsumption":0.2711790792,
-        "FLORIANOPOLIS_FBCFixo":0.1642473766,
+        "FLORIANOPOLIS_HouseholdConsumption":0.597303194,
+        "FLORIANOPOLIS_FBCFixo":0.3617737878,
         "RestBR_Export":0.0218717969,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.3261241148,
-        "RestBR_FBCFixo":0.1975264112
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "FLORIANOPOLIS_Financial":{
         "FLORIANOPOLIS_Export":0.0178938518,
-        "FLORIANOPOLIS_GovernmentConsumption":0.0025163229,
+        "FLORIANOPOLIS_GovernmentConsumption":0.0071596118,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
-        "FLORIANOPOLIS_HouseholdConsumption":0.3310506291,
+        "FLORIANOPOLIS_HouseholdConsumption":0.9419275935,
         "FLORIANOPOLIS_FBCFixo":0.0,
         "RestBR_Export":0.033018943,
-        "RestBR_GovernmentConsumption":0.0046432889,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.6108769644,
+        "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
     },
     "FLORIANOPOLIS_Realestate":{
@@ -121,24 +121,24 @@
     },
     "FLORIANOPOLIS_OtherServices":{
         "FLORIANOPOLIS_Export":0.0018335047,
-        "FLORIANOPOLIS_GovernmentConsumption":0.0010687627,
-        "FLORIANOPOLIS_ConsumptionNGOs":0.0026595869,
-        "FLORIANOPOLIS_HouseholdConsumption":0.0196067746,
-        "FLORIANOPOLIS_FBCFixo":0.0015409968,
+        "FLORIANOPOLIS_GovernmentConsumption":0.0400141397,
+        "FLORIANOPOLIS_ConsumptionNGOs":0.0995740993,
+        "FLORIANOPOLIS_HouseholdConsumption":0.7340714852,
+        "FLORIANOPOLIS_FBCFixo":0.0576944348,
         "RestBR_Export":0.0668123363,
-        "RestBR_GovernmentConsumption":0.038945377,
-        "RestBR_ConsumptionNGOs":0.0969145124,
-        "RestBR_HouseholdConsumption":0.7144647106,
-        "RestBR_FBCFixo":0.056153438
+        "RestBR_GovernmentConsumption":0.0,
+        "RestBR_ConsumptionNGOs":0.0,
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "FLORIANOPOLIS_Government":{
         "FLORIANOPOLIS_Export":0.0,
-        "FLORIANOPOLIS_GovernmentConsumption":0.458804736,
+        "FLORIANOPOLIS_GovernmentConsumption":1.0,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
         "FLORIANOPOLIS_HouseholdConsumption":0.0,
         "FLORIANOPOLIS_FBCFixo":0.0,
         "RestBR_Export":0.0,
-        "RestBR_GovernmentConsumption":0.541195264,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
@@ -160,12 +160,12 @@
         "FLORIANOPOLIS_GovernmentConsumption":0.0,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
         "FLORIANOPOLIS_HouseholdConsumption":0.0,
-        "FLORIANOPOLIS_FBCFixo":0.0001784964,
+        "FLORIANOPOLIS_FBCFixo":0.0,
         "RestBR_Export":0.8588916311,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.0790393341
+        "RestBR_FBCFixo":0.0792178305
     },
     "RestBR_Manufacturing":{
         "FLORIANOPOLIS_Export":0.0,
@@ -196,12 +196,12 @@
         "FLORIANOPOLIS_GovernmentConsumption":0.0,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
         "FLORIANOPOLIS_HouseholdConsumption":0.0,
-        "FLORIANOPOLIS_FBCFixo":0.0069819441,
+        "FLORIANOPOLIS_FBCFixo":0.0,
         "RestBR_Export":0.0086456401,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.9843110903
+        "RestBR_FBCFixo":0.9912930344
     },
     "RestBR_Trade":{
         "FLORIANOPOLIS_Export":0.0,
@@ -217,15 +217,15 @@
     },
     "RestBR_Transport":{
         "FLORIANOPOLIS_Export":0.0000818706,
-        "FLORIANOPOLIS_GovernmentConsumption":0.0000002162,
+        "FLORIANOPOLIS_GovernmentConsumption":0.0,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
-        "FLORIANOPOLIS_HouseholdConsumption":0.0004302226,
-        "FLORIANOPOLIS_FBCFixo":0.0000147404,
+        "FLORIANOPOLIS_HouseholdConsumption":0.0,
+        "FLORIANOPOLIS_FBCFixo":0.0,
         "RestBR_Export":0.1552556874,
-        "RestBR_GovernmentConsumption":0.0004099073,
+        "RestBR_GovernmentConsumption":0.0004101234,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.8158543236,
-        "RestBR_FBCFixo":0.0279530318
+        "RestBR_HouseholdConsumption":0.8162845463,
+        "RestBR_FBCFixo":0.0279677722
     },
     "RestBR_Business":{
         "FLORIANOPOLIS_Export":0.0,
@@ -255,12 +255,12 @@
         "FLORIANOPOLIS_Export":0.0002880656,
         "FLORIANOPOLIS_GovernmentConsumption":0.0,
         "FLORIANOPOLIS_ConsumptionNGOs":0.0,
-        "FLORIANOPOLIS_HouseholdConsumption":0.025355437,
+        "FLORIANOPOLIS_HouseholdConsumption":0.0,
         "FLORIANOPOLIS_FBCFixo":0.0,
         "RestBR_Export":0.0109454092,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.9634110881,
+        "RestBR_HouseholdConsumption":0.9887665251,
         "RestBR_FBCFixo":0.0
     },
     "RestBR_OtherServices":{

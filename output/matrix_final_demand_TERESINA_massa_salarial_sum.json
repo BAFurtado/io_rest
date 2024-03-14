@@ -1,50 +1,50 @@
 {
     "TERESINA_Agriculture":{
         "TERESINA_Export":0.0578239577,
-        "TERESINA_GovernmentConsumption":0.0000210422,
+        "TERESINA_GovernmentConsumption":0.000192965,
         "TERESINA_ConsumptionNGOs":0.0,
-        "TERESINA_HouseholdConsumption":0.046434618,
-        "TERESINA_FBCFixo":0.0066448253,
+        "TERESINA_HouseholdConsumption":0.4258233175,
+        "TERESINA_FBCFixo":0.0609356048,
         "RestBR_Export":0.472443988,
-        "RestBR_GovernmentConsumption":0.0001719228,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.3793886995,
-        "RestBR_FBCFixo":0.0542907796
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "TERESINA_Mining":{
         "TERESINA_Export":0.2570272675,
         "TERESINA_GovernmentConsumption":0.0,
         "TERESINA_ConsumptionNGOs":0.0,
         "TERESINA_HouseholdConsumption":0.0,
-        "TERESINA_FBCFixo":0.0236528839,
+        "TERESINA_FBCFixo":0.0792178305,
         "RestBR_Export":0.6038040193,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.0555649466
+        "RestBR_FBCFixo":0.0
     },
     "TERESINA_Manufacturing":{
         "TERESINA_Export":0.1757788421,
-        "TERESINA_GovernmentConsumption":0.0018757985,
+        "TERESINA_GovernmentConsumption":0.0031928989,
         "TERESINA_ConsumptionNGOs":0.0,
-        "TERESINA_HouseholdConsumption":0.3363194928,
-        "TERESINA_FBCFixo":0.0835823592,
+        "TERESINA_HouseholdConsumption":0.5724677527,
+        "TERESINA_FBCFixo":0.1422700924,
         "RestBR_Export":0.1234239126,
-        "RestBR_GovernmentConsumption":0.0013171004,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.2361482599,
-        "RestBR_FBCFixo":0.0586877332
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "TERESINA_Utilities":{
         "TERESINA_Export":0.0000113116,
         "TERESINA_GovernmentConsumption":0.0,
         "TERESINA_ConsumptionNGOs":0.0,
-        "TERESINA_HouseholdConsumption":0.2837142453,
+        "TERESINA_HouseholdConsumption":0.9956038504,
         "TERESINA_FBCFixo":0.0,
         "RestBR_Export":0.0000283828,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.711889605,
+        "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
     },
     "TERESINA_Construction":{
@@ -52,59 +52,59 @@
         "TERESINA_GovernmentConsumption":0.0,
         "TERESINA_ConsumptionNGOs":0.0,
         "TERESINA_HouseholdConsumption":0.0,
-        "TERESINA_FBCFixo":0.7772349258,
+        "TERESINA_FBCFixo":0.9912930344,
         "RestBR_Export":0.0018801671,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.2140581086
+        "RestBR_FBCFixo":0.0
     },
     "TERESINA_Trade":{
         "TERESINA_Export":0.0028792713,
-        "TERESINA_GovernmentConsumption":0.0005880689,
+        "TERESINA_GovernmentConsumption":0.0053143586,
         "TERESINA_ConsumptionNGOs":0.0,
-        "TERESINA_HouseholdConsumption":0.0970509253,
-        "TERESINA_FBCFixo":0.01013835,
+        "TERESINA_HouseholdConsumption":0.8770458483,
+        "TERESINA_FBCFixo":0.0916199178,
         "RestBR_Export":0.023140604,
-        "RestBR_GovernmentConsumption":0.0047262897,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.7799949229,
-        "RestBR_FBCFixo":0.0814815678
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "TERESINA_Transport":{
         "TERESINA_Export":0.0521132472,
-        "TERESINA_GovernmentConsumption":0.0001375898,
+        "TERESINA_GovernmentConsumption":0.0004101234,
         "TERESINA_ConsumptionNGOs":0.0,
-        "TERESINA_HouseholdConsumption":0.2738503095,
-        "TERESINA_FBCFixo":0.0093827368,
+        "TERESINA_HouseholdConsumption":0.8162845463,
+        "TERESINA_FBCFixo":0.0279677722,
         "RestBR_Export":0.1032243108,
-        "RestBR_GovernmentConsumption":0.0002725336,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.5424342368,
-        "RestBR_FBCFixo":0.0185850354
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "TERESINA_Business":{
         "TERESINA_Export":0.015028236,
         "TERESINA_GovernmentConsumption":0.0,
         "TERESINA_ConsumptionNGOs":0.0,
-        "TERESINA_HouseholdConsumption":0.2240817338,
-        "TERESINA_FBCFixo":0.1357215204,
+        "TERESINA_HouseholdConsumption":0.597303194,
+        "TERESINA_FBCFixo":0.3617737878,
         "RestBR_Export":0.0250304213,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.3732214601,
-        "RestBR_FBCFixo":0.2260522674
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "TERESINA_Financial":{
         "TERESINA_Export":0.014036237,
-        "TERESINA_GovernmentConsumption":0.0019738458,
+        "TERESINA_GovernmentConsumption":0.0071596118,
         "TERESINA_ConsumptionNGOs":0.0,
-        "TERESINA_HouseholdConsumption":0.259681657,
+        "TERESINA_HouseholdConsumption":0.9419275935,
         "TERESINA_FBCFixo":0.0,
         "RestBR_Export":0.0368765578,
-        "RestBR_GovernmentConsumption":0.0051857659,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.6822459365,
+        "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
     },
     "TERESINA_Realestate":{
@@ -121,24 +121,24 @@
     },
     "TERESINA_OtherServices":{
         "TERESINA_Export":0.0020332107,
-        "TERESINA_GovernmentConsumption":0.0011851727,
-        "TERESINA_ConsumptionNGOs":0.0029492701,
-        "TERESINA_HouseholdConsumption":0.0217423519,
-        "TERESINA_FBCFixo":0.0017088427,
+        "TERESINA_GovernmentConsumption":0.0400141397,
+        "TERESINA_ConsumptionNGOs":0.0995740993,
+        "TERESINA_HouseholdConsumption":0.7340714852,
+        "TERESINA_FBCFixo":0.0576944348,
         "RestBR_Export":0.0666126303,
-        "RestBR_GovernmentConsumption":0.0388289669,
-        "RestBR_ConsumptionNGOs":0.0966248292,
-        "RestBR_HouseholdConsumption":0.7123291333,
-        "RestBR_FBCFixo":0.0559855921
+        "RestBR_GovernmentConsumption":0.0,
+        "RestBR_ConsumptionNGOs":0.0,
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "TERESINA_Government":{
         "TERESINA_Export":0.0,
-        "TERESINA_GovernmentConsumption":0.2588681338,
+        "TERESINA_GovernmentConsumption":1.0,
         "TERESINA_ConsumptionNGOs":0.0,
         "TERESINA_HouseholdConsumption":0.0,
         "TERESINA_FBCFixo":0.0,
         "RestBR_Export":0.0,
-        "RestBR_GovernmentConsumption":0.7411318662,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
@@ -169,15 +169,15 @@
     },
     "RestBR_Manufacturing":{
         "TERESINA_Export":0.0005201363,
-        "TERESINA_GovernmentConsumption":0.0000055506,
+        "TERESINA_GovernmentConsumption":0.0,
         "TERESINA_ConsumptionNGOs":0.0,
-        "TERESINA_HouseholdConsumption":0.0009951822,
-        "TERESINA_FBCFixo":0.0002473234,
+        "TERESINA_HouseholdConsumption":0.0,
+        "TERESINA_FBCFixo":0.0,
         "RestBR_Export":0.2986826184,
-        "RestBR_GovernmentConsumption":0.0031873484,
+        "RestBR_GovernmentConsumption":0.0031928989,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.5714725705,
-        "RestBR_FBCFixo":0.142022769
+        "RestBR_HouseholdConsumption":0.5724677527,
+        "RestBR_FBCFixo":0.1422700924
     },
     "RestBR_Utilities":{
         "TERESINA_Export":0.0,
@@ -196,12 +196,12 @@
         "TERESINA_GovernmentConsumption":0.0,
         "TERESINA_ConsumptionNGOs":0.0,
         "TERESINA_HouseholdConsumption":0.0,
-        "TERESINA_FBCFixo":0.0038499265,
+        "TERESINA_FBCFixo":0.0,
         "RestBR_Export":0.00867315,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.9874431079
+        "RestBR_FBCFixo":0.9912930344
     },
     "RestBR_Trade":{
         "TERESINA_Export":0.0,
@@ -255,12 +255,12 @@
         "TERESINA_Export":0.0000941944,
         "TERESINA_GovernmentConsumption":0.0,
         "TERESINA_ConsumptionNGOs":0.0,
-        "TERESINA_HouseholdConsumption":0.0082909602,
+        "TERESINA_HouseholdConsumption":0.0,
         "TERESINA_FBCFixo":0.0,
         "RestBR_Export":0.0111392804,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.980475565,
+        "RestBR_HouseholdConsumption":0.9887665251,
         "RestBR_FBCFixo":0.0
     },
     "RestBR_OtherServices":{

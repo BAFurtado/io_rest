@@ -1,50 +1,50 @@
 {
     "IPATINGA_Agriculture":{
         "IPATINGA_Export":0.0960270408,
-        "IPATINGA_GovernmentConsumption":0.0000349443,
+        "IPATINGA_GovernmentConsumption":0.000192965,
         "IPATINGA_ConsumptionNGOs":0.0,
-        "IPATINGA_HouseholdConsumption":0.0771130018,
-        "IPATINGA_FBCFixo":0.0110349227,
+        "IPATINGA_HouseholdConsumption":0.4258233175,
+        "IPATINGA_FBCFixo":0.0609356048,
         "RestBR_Export":0.434240905,
-        "RestBR_GovernmentConsumption":0.0001580207,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.3487103157,
-        "RestBR_FBCFixo":0.0499006821
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "IPATINGA_Mining":{
         "IPATINGA_Export":0.163339681,
         "IPATINGA_GovernmentConsumption":0.0,
         "IPATINGA_ConsumptionNGOs":0.0,
         "IPATINGA_HouseholdConsumption":0.0,
-        "IPATINGA_FBCFixo":0.0150313021,
+        "IPATINGA_FBCFixo":0.0792178305,
         "RestBR_Export":0.6974916058,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.0641865284
+        "RestBR_FBCFixo":0.0
     },
     "IPATINGA_Manufacturing":{
         "IPATINGA_Export":0.2573632122,
-        "IPATINGA_GovernmentConsumption":0.0027464143,
+        "IPATINGA_GovernmentConsumption":0.0031928989,
         "IPATINGA_ConsumptionNGOs":0.0,
-        "IPATINGA_HouseholdConsumption":0.4924157195,
-        "IPATINGA_FBCFixo":0.1223755043,
+        "IPATINGA_HouseholdConsumption":0.5724677527,
+        "IPATINGA_FBCFixo":0.1422700924,
         "RestBR_Export":0.0418395425,
-        "RestBR_GovernmentConsumption":0.0004464846,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.0800520332,
-        "RestBR_FBCFixo":0.0198945881
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "IPATINGA_Utilities":{
         "IPATINGA_Export":0.00000849,
         "IPATINGA_GovernmentConsumption":0.0,
         "IPATINGA_ConsumptionNGOs":0.0,
-        "IPATINGA_HouseholdConsumption":0.2129433561,
+        "IPATINGA_HouseholdConsumption":0.9956038504,
         "IPATINGA_FBCFixo":0.0,
         "RestBR_Export":0.0000312044,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.7826604943,
+        "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
     },
     "IPATINGA_Construction":{
@@ -52,12 +52,12 @@
         "IPATINGA_GovernmentConsumption":0.0,
         "IPATINGA_ConsumptionNGOs":0.0,
         "IPATINGA_HouseholdConsumption":0.0,
-        "IPATINGA_FBCFixo":0.2311223063,
+        "IPATINGA_FBCFixo":0.9912930344,
         "RestBR_Export":0.006676916,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
-        "RestBR_FBCFixo":0.7601707281
+        "RestBR_FBCFixo":0.0
     },
     "IPATINGA_Trade":{
         "IPATINGA_Export":0.0260198753,
@@ -73,72 +73,72 @@
     },
     "IPATINGA_Transport":{
         "IPATINGA_Export":0.0478524398,
-        "IPATINGA_GovernmentConsumption":0.0001263404,
+        "IPATINGA_GovernmentConsumption":0.0004101234,
         "IPATINGA_ConsumptionNGOs":0.0,
-        "IPATINGA_HouseholdConsumption":0.2514601595,
-        "IPATINGA_FBCFixo":0.0086155992,
+        "IPATINGA_HouseholdConsumption":0.8162845463,
+        "IPATINGA_FBCFixo":0.0279677722,
         "RestBR_Export":0.1074851182,
-        "RestBR_GovernmentConsumption":0.000283783,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.5648243868,
-        "RestBR_FBCFixo":0.0193521731
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "IPATINGA_Business":{
         "IPATINGA_Export":0.016175441,
         "IPATINGA_GovernmentConsumption":0.0,
         "IPATINGA_ConsumptionNGOs":0.0,
-        "IPATINGA_HouseholdConsumption":0.2411873785,
-        "IPATINGA_FBCFixo":0.1460820441,
+        "IPATINGA_HouseholdConsumption":0.597303194,
+        "IPATINGA_FBCFixo":0.3617737878,
         "RestBR_Export":0.0238832164,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.3561158155,
-        "RestBR_FBCFixo":0.2156917438
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "IPATINGA_Financial":{
         "IPATINGA_Export":0.0139383792,
-        "IPATINGA_GovernmentConsumption":0.0019600846,
+        "IPATINGA_GovernmentConsumption":0.0071596118,
         "IPATINGA_ConsumptionNGOs":0.0,
-        "IPATINGA_HouseholdConsumption":0.25787121,
+        "IPATINGA_HouseholdConsumption":0.9419275935,
         "IPATINGA_FBCFixo":0.0,
         "RestBR_Export":0.0369744155,
-        "RestBR_GovernmentConsumption":0.0051995272,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.6840563835,
+        "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
     },
     "IPATINGA_Realestate":{
         "IPATINGA_Export":0.0013007868,
         "IPATINGA_GovernmentConsumption":0.0,
         "IPATINGA_ConsumptionNGOs":0.0,
-        "IPATINGA_HouseholdConsumption":0.1144947987,
+        "IPATINGA_HouseholdConsumption":0.9887665251,
         "IPATINGA_FBCFixo":0.0,
         "RestBR_Export":0.0099326881,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.8742717264,
+        "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
     },
     "IPATINGA_OtherServices":{
         "IPATINGA_Export":0.0022221052,
-        "IPATINGA_GovernmentConsumption":0.0012952806,
-        "IPATINGA_ConsumptionNGOs":0.0032232707,
-        "IPATINGA_HouseholdConsumption":0.0237623149,
-        "IPATINGA_FBCFixo":0.0018676019,
+        "IPATINGA_GovernmentConsumption":0.0400141397,
+        "IPATINGA_ConsumptionNGOs":0.0995740993,
+        "IPATINGA_HouseholdConsumption":0.7340714852,
+        "IPATINGA_FBCFixo":0.0576944348,
         "RestBR_Export":0.0664237358,
-        "RestBR_GovernmentConsumption":0.038718859,
-        "RestBR_ConsumptionNGOs":0.0963508286,
-        "RestBR_HouseholdConsumption":0.7103091703,
-        "RestBR_FBCFixo":0.0558268328
+        "RestBR_GovernmentConsumption":0.0,
+        "RestBR_ConsumptionNGOs":0.0,
+        "RestBR_HouseholdConsumption":0.0,
+        "RestBR_FBCFixo":0.0
     },
     "IPATINGA_Government":{
         "IPATINGA_Export":0.0,
-        "IPATINGA_GovernmentConsumption":0.1617709051,
+        "IPATINGA_GovernmentConsumption":1.0,
         "IPATINGA_ConsumptionNGOs":0.0,
         "IPATINGA_HouseholdConsumption":0.0,
         "IPATINGA_FBCFixo":0.0,
         "RestBR_Export":0.0,
-        "RestBR_GovernmentConsumption":0.8382290949,
+        "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
         "RestBR_HouseholdConsumption":0.0,
         "RestBR_FBCFixo":0.0
@@ -169,15 +169,15 @@
     },
     "RestBR_Manufacturing":{
         "IPATINGA_Export":0.0007870525,
-        "IPATINGA_GovernmentConsumption":0.0000083989,
+        "IPATINGA_GovernmentConsumption":0.0,
         "IPATINGA_ConsumptionNGOs":0.0,
-        "IPATINGA_HouseholdConsumption":0.0015058758,
-        "IPATINGA_FBCFixo":0.0003742413,
+        "IPATINGA_HouseholdConsumption":0.0,
+        "IPATINGA_FBCFixo":0.0,
         "RestBR_Export":0.2984157022,
-        "RestBR_GovernmentConsumption":0.0031845,
+        "RestBR_GovernmentConsumption":0.0031928989,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.5709618769,
-        "RestBR_FBCFixo":0.1418958511
+        "RestBR_HouseholdConsumption":0.5724677527,
+        "RestBR_FBCFixo":0.1422700924
     },
     "RestBR_Utilities":{
         "IPATINGA_Export":0.0,
@@ -205,15 +205,15 @@
     },
     "RestBR_Trade":{
         "IPATINGA_Export":0.0001004835,
-        "IPATINGA_GovernmentConsumption":0.000020523,
+        "IPATINGA_GovernmentConsumption":0.0,
         "IPATINGA_ConsumptionNGOs":0.0,
-        "IPATINGA_HouseholdConsumption":0.0033869745,
-        "IPATINGA_FBCFixo":0.0003538177,
+        "IPATINGA_HouseholdConsumption":0.0,
+        "IPATINGA_FBCFixo":0.0,
         "RestBR_Export":0.0259193918,
-        "RestBR_GovernmentConsumption":0.0052938356,
+        "RestBR_GovernmentConsumption":0.0053143586,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.8736588737,
-        "RestBR_FBCFixo":0.0912661001
+        "RestBR_HouseholdConsumption":0.8770458483,
+        "RestBR_FBCFixo":0.0916199178
     },
     "RestBR_Transport":{
         "IPATINGA_Export":0.0,
@@ -231,13 +231,13 @@
         "IPATINGA_Export":0.000005369,
         "IPATINGA_GovernmentConsumption":0.0,
         "IPATINGA_ConsumptionNGOs":0.0,
-        "IPATINGA_HouseholdConsumption":0.0000800551,
-        "IPATINGA_FBCFixo":0.0000484876,
+        "IPATINGA_HouseholdConsumption":0.0,
+        "IPATINGA_FBCFixo":0.0,
         "RestBR_Export":0.0400532884,
         "RestBR_GovernmentConsumption":0.0,
         "RestBR_ConsumptionNGOs":0.0,
-        "RestBR_HouseholdConsumption":0.5972231389,
-        "RestBR_FBCFixo":0.3617253002
+        "RestBR_HouseholdConsumption":0.597303194,
+        "RestBR_FBCFixo":0.3617737878
     },
     "RestBR_Financial":{
         "IPATINGA_Export":0.0,
